@@ -22,7 +22,7 @@ export default class HomeScreen extends React.Component {
             // </View>
             <View style={styles.container}>
                 <ImageBackground
-                    source={ require("../assets/images/home/background_home.jpg") }
+                    source={require("../assets/images/home/background_home.jpg")}
                     style={{ flex: 1 }}>
 
                     <View style={{ flex: 1, backgroundColor: 'rgba(100,100,100,0.6)' }}>
@@ -111,10 +111,8 @@ export default class HomeScreen extends React.Component {
     }
 }
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create({  
 	/*
-	*
-	*
 	*
 	*CONTAINER*/
     container: {
