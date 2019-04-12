@@ -1,16 +1,18 @@
 import React from 'react';
-import { View, ScrollView, Text, StyleSheet, Alert, CheckBox, ActivityIndicator } from 'react-native';
+import { View, ScrollView, Text, StyleSheet, Alert, CheckBox, ActivityIndicator, Picker } from 'react-native';
 import { MapView, Location, Permissions, IntentLauncherAndroid } from 'expo';
 import { widthPercentageToDP as width, heightPercentageToDP as height } from 'react-native-responsive-screen';
 
+import Polyline from '../components/route_screen/Polyline'
 
 const viaGaronaCoordinates = require('../data/viaGaronaCoordinates.json');
 const interestPoints = require('../data/centres_interets.json')
+const cities = ['Choisir une ville', 'Toulouse', 'Muret', 'cityc', 'cityd']
 
 
 export default class RouteScreen extends React.Component {
     static navigationOptions = {
-        title: 'Links',
+        title: 'Route', // Don't know if it's usefull
     };
 
     state = {
@@ -28,7 +30,9 @@ export default class RouteScreen extends React.Component {
             commerces_vie_pratique: false,
             hebergements: false,
             points_interets: false
-        }
+        },
+        startCity: '',
+        endCity: ''
     };
 
     componentWillMount() {
@@ -106,13 +110,32 @@ export default class RouteScreen extends React.Component {
         console.log(this.state)
     }
 
+    renderCitiesToPick(p_startOrEndCity) {
+        // if (p_startOrEndCity === "start") {
+        //     return cities.map((city, index) => {
+        //         return (
+        //             <Picker.Item key={index} label={city} value={city} />
+        //         )
+        //     })
+        // } else if (p_startOrEndCity === "start") {
+        //     return (
+        //         <Picker.Item label="Veuillez choisir une ville de départ" value="" />
+        //     )
+        // }
+        // return false
+        return cities.map((city, index) => {
+            return (
+                <Picker.Item key={index} label={city} value={city} />
+            )
+        })
+    }
+
     renderUserLocationMarker() {
         if (this.state.location.latitude && this.state.location.longitude) {
             return (
                 <MapView.Marker
                     coordinate={this.state.location}
-                    title="My Marker"
-                    description="Some description"
+                    title="Ma position"
                 />
             )
         }
@@ -163,7 +186,6 @@ export default class RouteScreen extends React.Component {
                 }
 
                 return placesList.map((place, index) => {
-                    // console.log(place.lat)
                     return this.renderPlaceMarker(place, index, "violet")
                 })
             } else {
@@ -177,7 +199,7 @@ export default class RouteScreen extends React.Component {
             <MapView.Marker
                 key={p_index}
                 coordinate={{ latitude: parseFloat(p_place.lat), longitude: parseFloat(p_place.long) }}
-                // title={p_place.nom}
+                title={p_place.nom}
                 // description={p_place.nom}
                 onPress={() => console.log('onpress marker ' + p_place.nom)}
                 pinColor={p_color}
@@ -188,7 +210,6 @@ export default class RouteScreen extends React.Component {
                         placeDetails: p_place
                     })}
                 >
-                    <Text>{p_place.nom}</Text>
                 </MapView.Callout>
             </MapView.Marker>
         )
@@ -220,31 +241,43 @@ export default class RouteScreen extends React.Component {
         } else {
             return (
                 <ScrollView style={styles.container}>
+                    <View>
+                        <View style={styles.pickerLine}>
+                            <Text>Ville de départ: </Text>
+                            <Picker
+                                selectedValue={this.state.startCity}
+                                style={{ height: width(15), width: width(40) }}
+                                onValueChange={(itemValue, itemIndex) => this.setState({ startCity: itemValue })}
+                            >
+                                {this.renderCitiesToPick("start")}
+                            </Picker>
+                        </View>
+                        <View style={styles.pickerLine}>
+                            <Text>Ville d'arrivée: </Text>
+                            <Picker
+                                selectedValue={this.state.endCity}
+                                style={{ height: width(15), width: width(40) }}
+                                onValueChange={(itemValue, itemIndex) => this.setState({ endCity: itemValue })}
+                            >
+                                {this.renderCitiesToPick("end")}
+                            </Picker>
+                        </View>
+                    </View>
                     <MapView
-                        style={{ alignSelf: 'stretch', height: height(70) }}
+                        style={{ alignSelf: 'stretch', height: height(60) }}
                         region={this.state.mapRegion}
                         onRegionChange={this._handleMapRegionChange}
                     >
-                        <MapView.Polyline
-                            coordinates={viaGaronaCoordinates}
-                            strokeColor="#000" // fallback for when `strokeColors` is not supported by the map-provider
-                            strokeColors={[
-                                '#7F0000',
-                                '#00000000', // no color, creates a "long" gradient between the previous and next coordinate
-                                '#B24112',
-                                '#E5845C',
-                                '#238C23',
-                                '#7F0000'
-                            ]}
-                            strokeWidth={4}
+                        <Polyline
+                            startCity={this.state.startCity}
+                            endCity={this.state.endCity}
+                            // coordinates={viaGaronaCoordinates}
                         />
                         {this.renderUserLocationMarker()}
                         {this.renderInterestPointMarkers("restaurants")}
                         {this.renderInterestPointMarkers("commerces_vie_pratique")}
                         {this.renderInterestPointMarkers("hebergements")}
                         {this.renderInterestPointMarkers("points_interets")}
-                        {/* {this.renderHebergementMarker()} */}
-                        {/* {this.renderCentresInteretsMarker()} */}
                     </MapView>
                     <View style={styles.checkboxsContainer}>
                         {this.renderInterestPointCheckbox("restaurants", "Restauration")}
@@ -262,6 +295,12 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
+    },
+    pickerLine: {
+        flexDirection: 'row',
+        alignItems: 'center', // align two elements of the container
+        justifyContent: 'space-around'
+
     },
     loadingContainer: {
         flex: 1,
