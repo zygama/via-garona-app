@@ -1,6 +1,8 @@
 import React from 'react';
 import { Dimensions, Image, Text } from 'react-native';
 import { createDrawerNavigator, createStackNavigator } from 'react-navigation';
+import { widthPercentageToDP as width } from 'react-native-responsive-screen';
+ 
 
 import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
@@ -51,7 +53,7 @@ const RootStackNavigator = createStackNavigator(
 			),
 			headerStyle: {
 				backgroundColor: '#1F5070',
-				height: 85
+				height: width(20)
 			},
 			headerTintColor: '#fff',
 			headerTitleStyle: {

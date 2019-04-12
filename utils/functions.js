@@ -43,7 +43,7 @@ export let distance = (lat1, lon1, lat2, lon2, unit) => {
         dist = dist * 180 / Math.PI;
         dist = dist * 60 * 1.1515;
         if (unit == "K") { dist = dist * 1.609344 } // kms
-        if (unit == "N") { dist = dist * 0.8684 }  // nautical miles
+        // if (unit == "N") { dist = dist * 0.8684 }  // nautical miles
         return dist;
     }
 }
