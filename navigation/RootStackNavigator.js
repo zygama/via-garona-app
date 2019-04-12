@@ -5,8 +5,9 @@ import { widthPercentageToDP as width } from 'react-native-responsive-screen';
  
 
 import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
+import RouteScreen from '../screens/RouteScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import InterestPointDetailsScreen from '../screens/InterestPointDetailsScreen';
 
 // import MenuDrawer from '../components/MenuDrawer';
 
@@ -19,19 +20,30 @@ import SettingsScreen from '../screens/SettingsScreen';
 // 	}
 // }
 
+const RouteStack = createStackNavigator({
+    Route: {
+        screen: RouteScreen
+    },
+    InterestPointDetails: {
+        screen: InterestPointDetailsScreen
+    }
+}, {
+    headerMode: 'none'
+})
+
 const RootStackNavigator = createStackNavigator(
 	{
 		Home: {
 			screen: HomeScreen
 		},
-		Links: {
-			screen: LinksScreen
+		Route: {
+            // screen: RouteScreen
+            screen: RouteStack
 		},
 		Settings: {
 			screen: SettingsScreen
 		}
-	},
-	{
+	}, {
 		defaultNavigationOptions: {
 			headerLeft: (
 				<Image
@@ -62,7 +74,6 @@ const RootStackNavigator = createStackNavigator(
 			}
 		}
 	}
-	//DrawerConfig
 );
 
 export default RootStackNavigator;

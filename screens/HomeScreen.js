@@ -16,10 +16,6 @@ export default class HomeScreen extends React.Component {
 
     render() {
         return (
-            // <View style={styles.container}>
-            //   <MenuButton navigation={this.props.navigation} />
-            //   <Text style={styles.text}>Homee</Text>
-            // </View>
             <View style={styles.container}>
                 <ImageBackground
                     source={require("../assets/images/home/background_home.jpg")}
@@ -30,7 +26,7 @@ export default class HomeScreen extends React.Component {
                                 <TouchableHighlight
                                     style={styles.highlighter}
                                     underlayColor='grey'
-                                    onPress={() => this.props.navigation.navigate('Links')}>
+                                    onPress={() => this.props.navigation.navigate('Route')}>
                                     <View style={styles.tabBarImageAndText}>
                                         <Image
                                             style={[styles.image, styles.whiteIcon, styles.tabBarImage]}

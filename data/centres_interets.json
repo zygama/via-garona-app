@@ -433,14 +433,6 @@
             "long": "1.0872894"
         },
         {
-            "lat": "",
-            "code_postal": "31220",
-            "commune": "CAZERES",
-            "nom": "PHARMACIE DES PYRENEES",
-            "adresse": "PHARMACIE DES PYRENEES\r\r\nMr Péres\r\r\n\r\r\nZone Carrefour\r\r\n31220 CAZERES",
-            "long": ""
-        },
-        {
             "lat": "43.2066938",
             "code_postal": "31220",
             "commune": "CAZERES",
@@ -681,22 +673,6 @@
             "long": "1.1535790"
         },
         {
-            "lat": "",
-            "code_postal": "31220",
-            "commune": "CAZERES",
-            "nom": "WC PUBLICS ET POINT D'EAU POTABLE",
-            "adresse": "WC PUBLICS ET POINT D'EAU POTABLE\r\r\nDerrière le Trésor Public\r\r\n31220 CAZERES",
-            "long": ""
-        },
-        {
-            "lat": "",
-            "code_postal": "31220",
-            "commune": "CAZERES",
-            "nom": "WC PUBLICS ET POINT D'EAU POTABLE",
-            "adresse": "WC PUBLICS ET POINT D'EAU POTABLE\r\r\nPlace Colbato\r\r\n31220 CAZERES",
-            "long": ""
-        },
-        {
             "lat": "43.2579497",
             "code_postal": "31310",
             "commune": "RIEUX-VOLVESTRE",
@@ -719,14 +695,6 @@
             "nom": "WC PUBLICS",
             "adresse": "WC PUBLICS\r\r\n31510 SAINT-BERTRAND-DE-COMMINGES",
             "long": "0.5708600"
-        },
-        {
-            "lat": "",
-            "code_postal": "31800",
-            "commune": "SAINT-GAUDENS",
-            "nom": "WC PUBLICS",
-            "adresse": "WC PUBLICS\r\r\nà Coté de la Montjoie\r\r\nPlateau de la Caoue\r\r\n31800 SAINT-GAUDENS",
-            "long": ""
         },
         {
             "lat": "43.1076410",
@@ -1217,14 +1185,6 @@
             "long": "1.2013334"
         },
         {
-            "lat": "",
-            "code_postal": "31390",
-            "commune": "CARBONNE",
-            "nom": "TAXI CARBONNE",
-            "adresse": "TAXI CARBONNE\r\r\n15 Chemin de Laveran\r\r\nZI Naudon\r\r\n31390 CARBONNE",
-            "long": ""
-        },
-        {
             "lat": "43.3711057",
             "code_postal": "31410",
             "commune": "MAUZAC",
@@ -1361,14 +1321,6 @@
             "long": "0.9298404"
         },
         {
-            "lat": "",
-            "code_postal": "31360",
-            "commune": "SAINT-MARTORY",
-            "nom": "BOULANGERIE LE PAIN DE NATTE",
-            "adresse": "BOULANGERIE LE PAIN DE NATTE\r\r\n4 Avenue Norbert Casteret\r\r\n31360 SAINT-MARTORY",
-            "long": ""
-        },
-        {
             "lat": "43.1749852",
             "code_postal": "31360",
             "commune": "BOUSSENS",
@@ -1423,14 +1375,6 @@
             "nom": "SUPER U",
             "adresse": "SUPER U\r\r\nAvenue des Pyrénées\r\r\n31220 MARTRES-TOLOSANE",
             "long": "0.9968850"
-        },
-        {
-            "lat": "",
-            "code_postal": "31360",
-            "commune": "BOUSSENS",
-            "nom": "SUPERETTE VIVAL",
-            "adresse": "SUPERETTE VIVAL\r\r\nMr et Mme DAUBERTE Philippe\r\r\nRue du 11 Novembre 1918\r\r\n31360 BOUSSENS",
-            "long": ""
         },
         {
             "lat": "43.1423482",
@@ -1821,14 +1765,6 @@
             "nom": "LE FRANCAIS",
             "adresse": "LE FRANCAIS\r\r\nPlace Napoléon\r\r\n31800 SAINT-GAUDENS",
             "long": "0.72376299"
-        },
-        {
-            "lat": "",
-            "code_postal": "31600",
-            "commune": "MURET",
-            "nom": "L'ESCALA",
-            "adresse": "L'ESCALA \r\r\n5 Rue Périoles \r\r\n31600 MURET",
-            "long": ""
         },
         {
             "lat": "43.1156950",
@@ -2787,14 +2723,6 @@
             "long": "1.2199995"
         },
         {
-            "lat": "",
-            "code_postal": "31600",
-            "commune": "MURET",
-            "nom": "ROTISSERIE ET CIE",
-            "adresse": "ROTISSERIE ET CIE \r\r\n31 Impasse Jacques Monod \r\r\n31600 MURET",
-            "long": ""
-        },
-        {
             "lat": "43.4801187",
             "code_postal": "31600",
             "commune": "MURET",
@@ -3661,14 +3589,6 @@
             "long": "0.8273241"
         },
         {
-            "lat": "",
-            "code_postal": "31800",
-            "commune": "SAINT-GAUDENS",
-            "nom": "CLUB DE CANOE KAYAK",
-            "adresse": "CLUB DE CANOE KAYAK\r\r\nMJC du Saint-Gaudinois\r\r\n1 Place du Maréchal Juin\r\r\n31800 SAINT-GAUDENS",
-            "long": ""
-        },
-        {
             "lat": "43.0797678",
             "code_postal": "31800",
             "commune": "LABARTHE-RIVIERE",
@@ -3693,28 +3613,12 @@
             "long": "0.8020170"
         },
         {
-            "lat": "",
-            "code_postal": "31210",
-            "commune": "POINTIS-DE-RIVIERE",
-            "nom": "LES ECURIES DE VIATES",
-            "adresse": "LES ECURIES DE VIATES\r\r\n60 Rue du Château d'Eau\r\r\n31210 POINTIS-DE-RIVIERE",
-            "long": ""
-        },
-        {
             "lat": "43.0785129",
             "code_postal": "31210",
             "commune": "HUOS",
             "nom": "MARC LUBIN",
             "adresse": "MARC LUBIN\r\r\n1 Rue de la Grotte\r\r\n31210 HUOS",
             "long": "0.5940183"
-        },
-        {
-            "lat": "",
-            "code_postal": "31510",
-            "commune": "LABROQUERE",
-            "nom": "MURMURES D'ARBRES",
-            "adresse": "MURMURES D'ARBRES\r\r\nMr Jean-Paul Delmas\r\r\n\r\r\nLe Castillon\r\r\n31510 LABROQUERE",
-            "long": ""
         },
         {
             "lat": "43.4484823",
