@@ -23,7 +23,6 @@ export default class Polyline extends React.Component {
             console.log(props.startCity)
             console.log(props.endCity)
             this.determineRouteCoordinates(props.startCity, props.endCity)
-
             // let coordinates = determineRouteCoordinates(props.startCity, props.endCity)
             // this.setState({ coordinates, color: "red" })
         }
@@ -54,6 +53,10 @@ export default class Polyline extends React.Component {
             newRouteCoordinates = viaGaronaCoordinates.slice(indexStartCity, indexEndCity + 1)
             this.setState({ coordinates: newRouteCoordinates, color: 'orange' })
         }
+        console.log(newRouteCoordinates[0])
+        console.log(newRouteCoordinates.length)
+        this.props.onPropsPassed(newRouteCoordinates)
+
     }
 
     // Function to check if two objects are equals

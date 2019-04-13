@@ -7,7 +7,6 @@ import Polyline from '../components/route_screen/Polyline'
 
 const viaGaronaCoordinates = require('../data/viaGaronaCoordinates.json');
 const interestPoints = require('../data/centres_interets.json')
-const cities = ['Choisir une ville', 'Toulouse', 'Muret', 'cityc', 'cityd']
 
 
 export default class RouteScreen extends React.Component {
@@ -15,25 +14,30 @@ export default class RouteScreen extends React.Component {
         title: 'Route', // Don't know if it's usefull
     };
 
-    state = {
-        loading: true,
-        mapRegion: {
-            // Toulouse
-            latitude: 43.6044622,
-            longitude: 1.4442469,
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421,
-        },
-        location: {},
-        checkbox: {
-            restaurants: false,
-            commerces_vie_pratique: false,
-            hebergements: false,
-            points_interets: false
-        },
-        startCity: '',
-        endCity: ''
-    };
+    constructor(props) {
+        super(props)
+        this.state = {
+            loading: true,
+            mapRegion: {
+                // Toulouse
+                latitude: 43.6044622,
+                longitude: 1.4442469,
+                latitudeDelta: 0.0922,
+                longitudeDelta: 0.0421,
+            },
+            location: {},
+            checkbox: {
+                restaurants: false,
+                commerces_vie_pratique: false,
+                hebergements: false,
+                points_interets: false
+            },
+            startCity: '',
+            endCity: ''
+        }
+        this.mapRef = null
+        this.fitMapToViaGaronnaCoordinates = this.fitMapToViaGaronnaCoordinates.bind(this)
+    }
 
     componentWillMount() {
         this.getLocationAsync();
@@ -102,6 +106,18 @@ export default class RouteScreen extends React.Component {
         })
     }
 
+    fitMapToViaGaronnaCoordinates = (p_coordinates) => {
+        console.log('fitMAPPs')
+        console.log(p_coordinates.length)
+        setTimeout(() => {
+            this.mapRef.fitToCoordinates(p_coordinates,
+                {
+                    edgePadding: { top: 20, right: 20, bottom: 20, left: 20 },
+                    animated: true
+                }, 100)
+        }) 
+    }
+
     updateCheckboxState(p_interestPointType) {
         let actualState = { ...this.state }
 
@@ -110,20 +126,23 @@ export default class RouteScreen extends React.Component {
         console.log(this.state)
     }
 
-    renderCitiesToPick(p_startOrEndCity) {
-        // if (p_startOrEndCity === "start") {
-        //     return cities.map((city, index) => {
-        //         return (
-        //             <Picker.Item key={index} label={city} value={city} />
-        //         )
-        //     })
-        // } else if (p_startOrEndCity === "start") {
-        //     return (
-        //         <Picker.Item label="Veuillez choisir une ville de départ" value="" />
-        //     )
-        // }
-        // return false
+    renderCitiesToPick() {
+        // Get the json containing cities (key) and their lat/long (value)
+        let jsonCities = require('../data/villes.json')
+        // Get cities in an array by iterating over keys of the json (which are the cities)
+        cities = Object.keys(jsonCities)
+        // Add a label value in the picker
+        // unshift() add item to the first place of an array
+        cities.unshift('Veuillez choisir une ville')
+
         return cities.map((city, index) => {
+            // Index 0 is message 'Veuillez choisir une ville' so his value is set to ''
+            if (index === 0) {
+                return (
+                    <Picker.Item key={index} label={city} value='' />
+                )
+            }
+
             return (
                 <Picker.Item key={index} label={city} value={city} />
             )
@@ -200,7 +219,6 @@ export default class RouteScreen extends React.Component {
                 key={p_index}
                 coordinate={{ latitude: parseFloat(p_place.lat), longitude: parseFloat(p_place.long) }}
                 title={p_place.nom}
-                // description={p_place.nom}
                 onPress={() => console.log('onpress marker ' + p_place.nom)}
                 pinColor={p_color}
                 // tracksViewChanges={false}
@@ -247,7 +265,10 @@ export default class RouteScreen extends React.Component {
                             <Picker
                                 selectedValue={this.state.startCity}
                                 style={{ height: width(15), width: width(40) }}
-                                onValueChange={(itemValue, itemIndex) => this.setState({ startCity: itemValue })}
+                                onValueChange={(itemValue, itemIndex) => {
+                                    this.setState({ startCity: itemValue })
+                                    this.fitMapToViaGaronnaCoordinates(viaGaronaCoordinates)
+                                }}
                             >
                                 {this.renderCitiesToPick("start")}
                             </Picker>
@@ -257,21 +278,25 @@ export default class RouteScreen extends React.Component {
                             <Picker
                                 selectedValue={this.state.endCity}
                                 style={{ height: width(15), width: width(40) }}
-                                onValueChange={(itemValue, itemIndex) => this.setState({ endCity: itemValue })}
+                                onValueChange={(itemValue, itemIndex) => {
+                                    this.setState({ endCity: itemValue })
+                                    this.fitMapToViaGaronnaCoordinates(viaGaronaCoordinates)
+                                }}
                             >
                                 {this.renderCitiesToPick("end")}
                             </Picker>
                         </View>
                     </View>
                     <MapView
+                        ref={ref => this.mapRef = ref}
+                        onMapReady={() => this.fitMapToViaGaronnaCoordinates(viaGaronaCoordinates)}
                         style={{ alignSelf: 'stretch', height: height(60) }}
                         region={this.state.mapRegion}
-                        onRegionChange={this._handleMapRegionChange}
                     >
                         <Polyline
                             startCity={this.state.startCity}
                             endCity={this.state.endCity}
-                            // coordinates={viaGaronaCoordinates}
+                            onPropsPassed={this.fitMapToViaGaronnaCoordinates}
                         />
                         {this.renderUserLocationMarker()}
                         {this.renderInterestPointMarkers("restaurants")}
