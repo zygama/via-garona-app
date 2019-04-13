@@ -79,6 +79,10 @@ export default class mainPointsInterets extends React.Component {
                         <View style={styles.listFunc}>
                             <Text style={styles.listTitle}>Choisissez vos points d'intérêts</Text>
 
+                            <TouchableHighlight
+                                style={styles.highlighter}
+                                underlayColor='grey'
+                                onPress={() => this.props.navigation.navigate('PointInteretTest')}>
                             <View style={styles.listFuncLink}>
                                 <Image
                                     style={[styles.image, styles.whiteIcon, styles.listFuncImage]}
@@ -86,27 +90,33 @@ export default class mainPointsInterets extends React.Component {
                                 />
                                 <Text style={styles.listFuncTitle}>En fonction d'une Ville</Text>
                             </View>
+                            </TouchableHighlight>
 
                             <TouchableHighlight
                                 style={styles.highlighter}
                                 underlayColor='grey'
-                                onPress={() => this.props.navigation.navigate('PointInteret')}>
+                                onPress={() => this.props.navigation.navigate('PointInteretNom')}>
                                 <View style={styles.listFuncLink}>
                                     <Image
                                         style={[styles.image, styles.whiteIcon, styles.listFuncImage]}
                                         source={{ uri: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Cog_font_awesome.svg/512px-Cog_font_awesome.svg.png" }}
                                     />
-                                    <Text style={styles.listFuncTitle}>En fonctione du nom</Text>
+                                    <Text style={styles.listFuncTitle}>En fonction du nom</Text>
                                 </View>
                             </TouchableHighlight>
 
-                            <View style={styles.listFuncLink}>
-                                <Image
-                                    style={[styles.image, styles.whiteIcon, styles.listFuncImage]}
-                                    source={{ uri: "https://static.thenounproject.com/png/370619-200.png" }}
-                                />
-                                <Text style={styles.listFuncTitle}>En fonction de la catégorie</Text>
-                            </View>
+                            <TouchableHighlight
+                                style={styles.highlighter}
+                                underlayColor='grey'
+                                onPress={() => this.props.navigation.navigate('PointInteretCat')}>
+                                <View style={styles.listFuncLink}>
+                                    <Image
+                                        style={[styles.image, styles.whiteIcon, styles.listFuncImage]}
+                                        source={{ uri: "https://static.thenounproject.com/png/370619-200.png" }}
+                                    />
+                                    <Text style={styles.listFuncTitle}>En fonction de la catégorie</Text>
+                                </View>
+                            </TouchableHighlight>
                         </View>
                     </View>
 

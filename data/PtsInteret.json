@@ -1,5 +1,5 @@
 {
-    "commerces_vie_pratique": [
+    "pointInteret": [
         {
             "poster_path":"../assets/images/pointsInterets/commerces_vie_pratique/marche.jpg",
             "lat": "43.2579175",
@@ -1673,9 +1673,7 @@
             "nom": "SNCF / GARE PORTET SAINT SIMON",
             "adresse": "SNCF / GARE PORTET SAINT SIMON\r\r\nAvenue de la Gare\r\r\n31120 PORTET-SUR-GARONNE",
             "long": "1.38920699"
-        }
-    ],
-    "hotels": [
+        },
         {
             "poster_path":"../assets/images/pointsInterets/hotels/hotel1.jpg",
             "lat": "43.1793566",
@@ -1873,9 +1871,7 @@
             "nom": "HOTEL DES SPORTS CHEZ KIKI",
             "adresse": "1 Avenue des Pyrénées\r\r\n31360 SAINT-MARTORY",
             "long": "0.93116589"
-        }
-    ],
-    "campings": [
+        },
         {
             "poster_path":"../assets/images/pointsInterets/campings/camping1.jpg",
             "lat": "43.1784071",
@@ -1983,9 +1979,7 @@
             "nom": "AIRE DE SERVICE",
             "adresse": "AIRE DE SERVICE\r\r\nPlace Nationale\r\r\n31360 SAINT-MARTORY",
             "long": "0.92892639"
-        }
-    ],
-    "loisirs": [
+        },
         {
             "poster_path":"../assets/images/pointsInterets/loisirs/loisir1.jpg",
             "lat": "43.4497203",
@@ -2417,9 +2411,7 @@
             "nom": "LASER GAME EVOLUTION - PORTET SUR GARONNE",
             "adresse": "LASER GAME EVOLUTION - PORTET SUR GARONNE\r\r\n36 Avenue des Palanques\r\r\nZone commerciale Carrefour\r\r\n31120 PORTET-SUR-GARONNE",
             "long": "1.3995350"
-        }
-    ],
-    "patrimoine": [
+        },
         {
             "poster_path":"../assets/images/pointsInterets/patrimoine/patrimoine1.jpg",
             "lat": "43.0924271",
@@ -3022,9 +3014,7 @@
             "nom": "VILLA GALLO-ROMAINE SITE D'ARNESP",
             "adresse": "VILLA GALLO-ROMAINE SITE D'ARNESP\r\r\nMairie de Valentine\r\r\nPlace du Bourdalès\r\r\n31800 VALENTINE",
             "long": "0.68833633"
-        }
-    ],
-    "restaurants": [
+        },
         {
             "poster_path":"../assets/images/pointsInterets/restaurants/restau1.jpg",
             "lat": "43.4774770",
@@ -4059,9 +4049,7 @@
             "nom": "ATELIER GOURMANDISES",
             "adresse": "ATELIER GOURMANDISES\r\r\n7 Place Jean Jaurès\r\r\n31800 SAINT-GAUDENS",
             "long": "0.72531630"
-        }
-    ],
-    "activites_sportives": [
+        },
         {
             "poster_path":"../assets/images/pointsInterets/activites_sportives/sport1.jpg",
             "lat": "43.4483793",

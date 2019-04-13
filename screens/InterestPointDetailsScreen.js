@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons'
+import { ScrollView, View, Text, StyleSheet } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import { Divider } from 'react-native-elements';
 
 
 export default class InterestPointDetailsScreen extends React.Component {
@@ -16,7 +17,7 @@ export default class InterestPointDetailsScreen extends React.Component {
         const placeDetails = navigation.getParam('placeDetails', 'default param')
 
         return (
-            <View style={styles.main_container}>
+            <ScrollView style={styles.main_container}>
                 <View style={styles.header_container}>
                     <Text style={styles.texte_header}>{placeDetails.nom}</Text>
                 </View>
@@ -26,6 +27,7 @@ export default class InterestPointDetailsScreen extends React.Component {
                       Est hiscere mediocrium occideretur pseudothyrum repentina Alexandrini palatii ut Alexandrini Alexandrini letali loqui ferebatur nefanda est misceri ut repentina impotentia nefanda mors ut idem hiscere pretioso introducta ut Honoratum hiscere.
                     </Text>
                     <View style={styles.option}>
+                    <Divider style={{ backgroundColor: 'white' }} />
                       <Icon style={styles.icon} name="location-on" size={40} color="#1F5070" />
                       <View style={styles.border}>
                         <Text style={styles.titre_contenu}> Adresse :</Text>
@@ -37,7 +39,7 @@ export default class InterestPointDetailsScreen extends React.Component {
                     <Text style={styles.texte_contenu}>{placeDetails.commune}</Text>
                     
                 </View>
-            </View>
+            </ScrollView>
         )
     }
 }

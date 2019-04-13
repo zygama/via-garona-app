@@ -14,7 +14,9 @@ import mainItineraire from '../screens/itineraire/mainItineraire';
 import mainNavigation from '../screens/navigation/mainNavigation';
 import BurgerScreen from '../screens/BurgerScreen';
 import Wiki from '../screens/navigation/Wiki';
-import PointInteret from '../screens/pointsInterets/PointInteret';
+import PointInteretCat from '../screens/pointsInterets/PointInteretCat';
+import PointInteretNom from '../screens/pointsInterets/PointInteretNom';
+import PointInteretTest from '../screens/pointsInterets/PointInteretTest';
 
 // import MenuDrawer from '../components/MenuDrawer';
 
@@ -65,8 +67,14 @@ const RootStackNavigator = createStackNavigator(
 		Wiki: {
 			screen: Wiki
 		},
-		PointInteret: {
-			screen: PointInteret
+		PointInteretCat: {
+			screen: PointInteretCat
+		},
+		PointInteretNom: {
+			screen: PointInteretNom
+		},
+		PointInteretTest: {
+			screen: PointInteretTest
 		},
 		InterestDetails: {
 			screen: InterestPointDetailsScreen
