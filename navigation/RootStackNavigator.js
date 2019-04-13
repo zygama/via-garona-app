@@ -1,10 +1,20 @@
 import React from 'react';
 import { Dimensions, Image, Text } from 'react-native';
 import { createDrawerNavigator, createStackNavigator } from 'react-navigation';
+import { widthPercentageToDP as width } from 'react-native-responsive-screen';
+ 
 
 import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
+import RouteScreen from '../screens/RouteScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import InterestPointDetailsScreen from '../screens/InterestPointDetailsScreen';
+
+import mainPointsInterets from '../screens/pointsInterets/mainPointsInterets';
+import mainItineraire from '../screens/itineraire/mainItineraire';
+import mainNavigation from '../screens/navigation/mainNavigation';
+import BurgerScreen from '../screens/BurgerScreen';
+import Wiki from '../screens/navigation/Wiki';
+import PointInteret from '../screens/pointsInterets/PointInteret';
 
 // import MenuDrawer from '../components/MenuDrawer';
 
@@ -17,19 +27,51 @@ import SettingsScreen from '../screens/SettingsScreen';
 // 	}
 // }
 
+const RouteStack = createStackNavigator({
+    Route: {
+        screen: RouteScreen
+    },
+    InterestPointDetails: {
+        screen: InterestPointDetailsScreen
+    }
+}, {
+    headerMode: 'none'
+})
+
 const RootStackNavigator = createStackNavigator(
 	{
 		Home: {
 			screen: HomeScreen
 		},
-		Links: {
-			screen: LinksScreen
+		Route: {
+            // screen: RouteScreen
+            screen: RouteStack
 		},
 		Settings: {
 			screen: SettingsScreen
+		},
+		MainPointsInterets :{
+			screen: mainPointsInterets
+		},
+		MainNavigation :{
+			screen: mainNavigation
+		},
+		MainItineraire :{
+			screen: mainItineraire
+		},
+		Burger: {
+			screen: BurgerScreen
+		},
+		Wiki: {
+			screen: Wiki
+		},
+		PointInteret: {
+			screen: PointInteret
+		},
+		InterestDetails: {
+			screen: InterestPointDetailsScreen
 		}
-	},
-	{
+	}, {
 		defaultNavigationOptions: {
 			headerLeft: (
 				<Image
@@ -51,7 +93,7 @@ const RootStackNavigator = createStackNavigator(
 			),
 			headerStyle: {
 				backgroundColor: '#1F5070',
-				height: 85
+				height: width(20)
 			},
 			headerTintColor: '#fff',
 			headerTitleStyle: {
@@ -60,7 +102,6 @@ const RootStackNavigator = createStackNavigator(
 			}
 		}
 	}
-	//DrawerConfig
 );
 
 export default RootStackNavigator;

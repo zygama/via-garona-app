@@ -1,0 +1,56 @@
+{
+    "Toulouse" : {
+        "latitude" : 43.607883768644854 , 
+        "longitude" : 1.441894417008673
+    },
+
+    "Porter-Sur-Garonne" : {
+        "latitude" : 43.546946505937136 , 
+        "longitude" : 1.414723880134918      
+    },
+    "Muret" : {
+        "latitude" : 43.465545212017815 , 
+        "longitude" : 1.345843354746407      
+    },
+    "Noé" : {
+        "latitude" : 43.35397803246816 , 
+        "longitude" : 1.287584330158689    
+    },
+    "Carbonne" : {
+        "latitude" : 43.31062083446876 , 
+        "longitude" : 1.233837388343094      
+    },
+    "Rieux-Volvestre" : {
+        "latitude" : 43.24257282658202 , 
+        "longitude" : 1.155515823326465      
+    },
+    "Cazères" : {
+        "latitude" : 43.203283492376734 , 
+        "longitude" : 1.073266515929212      
+    },
+    "Martres-Tolosane" : {
+        "latitude" : 43.18224280906112 , 
+        "longitude" : 0.972761042375089      
+    },
+    "St-Martory" : {
+        "latitude" : 43.15352190345907 , 
+        "longitude" : 0.945022459879157      
+    },
+    "Labarthe-Inard" : {
+        "latitude" : 43.10863778891617 , 
+        "longitude" : 0.808083583981251      
+    },
+    "St-Gaudens" : {
+        "latitude" : 43.10681373065833 , 
+        "longitude" : 0.759664502146196      
+    },
+    "Gourdan-Polignan" : {
+        "latitude" : 43.07472310490643 , 
+        "longitude" : 0.588255714253883      
+    },
+    "St-Bertrand-de-Comminges" : {
+        "latitude" : 43.02710161781375 , 
+        "longitude" : 0.570756939519139      
+    }
+    
+} 
