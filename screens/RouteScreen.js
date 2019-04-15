@@ -5,7 +5,7 @@ import { widthPercentageToDP as width, heightPercentageToDP as height } from 're
 
 import Polyline from '../components/route_screen/Polyline'
 
-const viaGaronaCoordinates = require('../data/viaGaronaCoordinates.json');
+// const viaGaronaCoordinates = require('../data/viaGaronaCoordinates.json');
 const interestPoints = require('../data/centres_interets.json')
 
 // Redux implementation
@@ -112,16 +112,15 @@ class RouteScreen extends React.Component {
     }
 
     fitMapToViaGaronnaCoordinates = () => {
-    // fitMapToViaGaronnaCoordinates = (p_coordinates) => {
         console.log('fitMAPPs')
-        // console.log(p_coordinates.length)
+        // setTimeout to let the state being update before animate to coordinates (hack ?)
         setTimeout(() => {
             this.mapRef.fitToCoordinates(this.props.routeCoordinates.coordinates,
                 {
-                    edgePadding: { top: 20, right: 20, bottom: 20, left: 20 },
+                    edgePadding: { top: 40, right: 40, bottom: 40, left: 40 },
                     animated: true
-                }, 100)
-        }) 
+                })
+        }, 0) 
     }
 
     updateCheckboxState(p_interestPointType) {
@@ -129,6 +128,7 @@ class RouteScreen extends React.Component {
 
         actualState.checkbox[p_interestPointType] = !actualState.checkbox[p_interestPointType]
         this.setState({ actualState })
+        this.fitMapToViaGaronnaCoordinates()
         console.log(this.state)
     }
 

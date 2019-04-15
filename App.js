@@ -2,7 +2,7 @@ import React from 'react';
 // Redux implementation
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
-import RouteCoordinateReducer from './Reducers/RouteCoordinatesReducer'
+import RouteCoordinateReducer from './redux/reducers/RouteCoordinatesReducer'
 
 // Navigation implementation
 import AppNavigator from './navigation/AppNavigator'

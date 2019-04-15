@@ -15,16 +15,10 @@ export default class InterestPointDetailsScreen extends React.Component {
 
     openMapsToInterestPoint() {
         const { lat, long } = this.placeDetails
-        // openMap({ latitude: Number(this.placeDetails.lat), longitude: Number(this.placeDetails.long) });
         openMap({ query: `${lat},${long}` });
-        // console.log(this.placeDetails.lat)
-        // console.log(this.placeDetails.long)
     }
 
     render() {
-        // const { navigation } = this.props
-        // const placeDetails = navigation.getParam('placeDetails', 'default param')
-
         return (
             <View style={styles.container}>
                 <Text>{JSON.stringify(this.placeDetails)}</Text>

@@ -4,41 +4,30 @@ import { MapView } from 'expo';
 // Redux implementation
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { updateCoordinates } from '../../Actions/RouteCoordinatesActions'
+import { updateCoordinates } from '../../redux/actions/RouteCoordinatesActions'
 
-const viaGaronaCoordinates = require('../../data/viaGaronaCoordinates.json');
 const cityCoordinates = require('../../data/villes.json')
-const coordinates = []
+const viaGaronaCoordinates = require('../../data/viaGaronaCoordinates.json')
 
 
 class Polyline extends React.Component {
     constructor(props) {
         super(props)
-        this.state = {
-            // coordinates: this.props.coordinates,
-            coordinates: viaGaronaCoordinates,
-            color: ''
-        }
-        this.test = false
+        this.hackInfiniteLoop = false // Will be usefull as a hack to not rerender in infinite loop
     }
 
     componentWillMount() {
         console.log("polyline cwm")
         console.log(typeof this.props.routeCoordinates)
-        console.log(this.props.routeCoordinates)
-        // console.log(this.props.routeCoordinates)
-        // this.setState({ coordinates: this.props.routeCoordinates })
-        // console.log(cityCoordinates)
-        // this.determineRouteCoordinates("Toulouse", "Muret")
     }
 
     componentWillReceiveProps(props) {
-        if (props.startCity && props.endCity && this.test === false) {
-            console.log(props.startCity)
-            console.log(props.endCity)
-            this.determineRouteCoordinates(props.startCity, props.endCity)
-            // let coordinates = determineRouteCoordinates(props.startCity, props.endCity)
-            // this.setState({ coordinates, color: "red" })
+        if (props.startCity && props.endCity && this.hackInfiniteLoop === false) {
+            if (props.startCity !== props.endCity) { // Execute only if the two cities aren't the same
+                console.log(props.startCity)
+                console.log(props.endCity)
+                this.determineRouteCoordinates(props.startCity, props.endCity)
+            }
         }
     }
 
@@ -63,17 +52,18 @@ class Polyline extends React.Component {
         if (indexStartCity > indexEndCity) {
             newRouteCoordinates = viaGaronaCoordinates.slice(indexEndCity, indexStartCity + 1)
             this.props.updateCoordinates(newRouteCoordinates)
-            // this.setState({ coordinates: newRouteCoordinates, color: 'green' })
         } else if (indexEndCity > indexStartCity) {
             newRouteCoordinates = viaGaronaCoordinates.slice(indexStartCity, indexEndCity + 1)
             this.props.updateCoordinates(newRouteCoordinates)
-            // this.setState({ coordinates: newRouteCoordinates, color: 'orange' })
         }
-        this.test = true
-        // console.log(newRouteCoordinates[0])
-        // console.log(newRouteCoordinates.length) 
-        this.props.onPropsPassed(newRouteCoordinates)
+        this.hackInfiniteLoop = true
+        this.props.onPropsPassed()
 
+        // Wait 500ms before set the var to hackInfiniteLoop to false
+        // If not this function will be called only one time
+        setTimeout(() => {
+            this.hackInfiniteLoop = false
+        }, 500) 
     }
 
     // Function to check if two objects are equals
@@ -107,8 +97,7 @@ class Polyline extends React.Component {
         return (
             <MapView.Polyline
                 coordinates={this.props.routeCoordinates.coordinates}
-                // coordinates={this.state.coordinates}
-                strokeColor={this.state.color ? this.state.color : "#000"} // fallback for when `strokeColors` is not supported by the map-provider
+                strokeColor={"#000"} // fallback for when `strokeColors` is not supported by the map-provider
                 strokeWidth={4}
             />
         )
@@ -117,7 +106,6 @@ class Polyline extends React.Component {
 
 const mapStateToProps = state => {
     console.log('mapStateToProps')
-    console.log(state)
     
     const { routeCoordinates } = state
     return { routeCoordinates }
