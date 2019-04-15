@@ -8,18 +8,10 @@ import {
     Image
 } from 'react-native';
 
-// import styles from "../assets/Styles";
-
-//import MenuButton from '../components/MenuButton'
 
 export default class mainNavigation extends React.Component {
-    
     render() {
         return (
-                // <View style={styles.container}>
-                //   <MenuButton navigation={this.props.navigation} />
-                //   <Text style={styles.text}>Homee</Text>
-                // </View>
             <View style={styles.container}>
                 <ImageBackground
                     source={require("../../assets/images/home/background_home.jpg")}
@@ -84,7 +76,7 @@ export default class mainNavigation extends React.Component {
                                     style={[styles.image, styles.whiteIcon, styles.listFuncImage]}
                                     source={{ uri: "https://image.flaticon.com/icons/png/512/130/130188.png" }}
                                 />
-                                <Text style={styles.listFuncTitle}>Vos Randonnées</Text>
+                                <Text style={styles.listFuncTitle}>Favoris</Text>
                             </View>
 
                             <View style={styles.listFuncLink}>

@@ -21,7 +21,8 @@
     "react-native-responsive-screen": "^1.2.1",
     "react-navigation": "^3.0.9",
     "react-redux": "^4.4.9",
-    "redux": "^4.0.1"
+    "redux": "^4.0.1",
+    "string_score": "^0.1.22"
   },
   "devDependencies": {
     "babel-preset-expo": "^5.0.0",

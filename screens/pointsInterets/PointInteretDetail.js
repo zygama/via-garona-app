@@ -26,26 +26,11 @@ export default class PointInteretDetail extends React.Component {
         const { navigation } = this.props
         const placeDetails = navigation.getParam('placeDetails', 'default param')
 
-        function getImage(img_name) {
-            switch(img_name) {
-              case "sport1.jpg": return require("../../assets/images/pointsInterets/activites_sportives/sport1.jpg");
-              case "camping1.jpg": return require("../../assets/images/pointsInterets/campings/camping1.jpg");
-              case "commerce3.jpg": return require("../../assets/images/pointsInterets/commerces_vie_pratique/commerce3.jpg");
-              case "hotel1.jpg": return require("../../assets/images/pointsInterets/hotels/hotel1.jpg");
-              case "loisir1.jpg": return require("../../assets/images/pointsInterets/loisirs/loisir1.jpg");
-              case "patrimoine1.jpg": return require("../../assets/images/pointsInterets/patrimoine/patrimoine1.jpg");
-              case "restau1.jpg": return require("../../assets/images/pointsInterets/restaurants/restau1.jpg");
-              case "marche.jpg": return require("../../assets/images/pointsInterets/commerces_vie_pratique/marche.jpg");
-              case "picnic.jpeg": return require("../../assets/images/pointsInterets/commerces_vie_pratique/picnic.jpeg");
-            }
-          }
-        
-
         return (
             <ScrollView style={styles.main_container}>
 
                 <ImageBackground
-                    source={getImage(placeDetails.poster_path)}
+                    source={{ uri: placeDetails.poster_path }}
                     style={styles.header_container}
                 >
                     <Text style={styles.texte_header}>{placeDetails.nom}</Text>

@@ -10,9 +10,10 @@ import {
     Button,
 } from 'react-native';
 import pointInteret from '../../data/PtsInteret.json';
+require('string_score')
+
 
 import { toLowerCaseWithoutAccents } from '../../utils/functions'
-
 
 
 export default class PointInteretVille extends React.Component {
@@ -38,9 +39,16 @@ export default class PointInteretVille extends React.Component {
             let inputString = toLowerCaseWithoutAccents(this.state.searchedText)
             let actualPointInteret = toLowerCaseWithoutAccents(this.dataSource[i].commune)
 
-            if (inputString === actualPointInteret) {
+
+            if (actualPointInteret.score(inputString) >= 0.35) {
+                console.log(inputString)
+                console.log(actualPointInteret)
+                console.log(actualPointInteret.score(inputString))
                 pointsInteretsFound.push(this.dataSource[i])
             }
+            // if (inputString === actualPointInteret) {
+            //     pointsInteretsFound.push(this.dataSource[i])
+            // }
         }
         this.setState({ pointsInteretsFound })
 
@@ -55,8 +63,6 @@ export default class PointInteretVille extends React.Component {
                         style={styles.champ}
                         value={this.state.searchedText}
                         onChangeText={ searchedText => this.setState({ searchedText })}
-                        // onChangeText={(text) => this._searchTextInputChanged(text)}
-                        onSubmitEditing={() => this._loadPtsInteret()}
                         placeholder="Vous avez un lieu en tête ?"
                     />
                     <Button
