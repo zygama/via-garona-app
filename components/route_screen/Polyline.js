@@ -1,42 +1,29 @@
 import React from 'react';
 import { MapView } from 'expo';
 
-// Redux implementation
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-import { updateCoordinates } from '../../Actions/RouteCoordinatesActions'
-
 const viaGaronaCoordinates = require('../../data/viaGaronaCoordinates.json');
 const cityCoordinates = require('../../data/villes.json')
 const coordinates = []
 
 
-class Polyline extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            // coordinates: this.props.coordinates,
-            coordinates: viaGaronaCoordinates,
-            color: ''
-        }
-        this.test = false
+export default class Polyline extends React.Component {
+    state = {
+        coordinates: viaGaronaCoordinates,
+        color: ''
     }
 
     componentWillMount() {
         console.log("polyline cwm")
-        console.log(typeof this.props.routeCoordinates)
-        console.log(this.props.routeCoordinates)
-        // console.log(this.props.routeCoordinates)
-        // this.setState({ coordinates: this.props.routeCoordinates })
         // console.log(cityCoordinates)
         // this.determineRouteCoordinates("Toulouse", "Muret")
     }
 
     componentWillReceiveProps(props) {
-        if (props.startCity && props.endCity && this.test === false) {
+        if (props.startCity && props.endCity) {
             console.log(props.startCity)
             console.log(props.endCity)
             this.determineRouteCoordinates(props.startCity, props.endCity)
+
             // let coordinates = determineRouteCoordinates(props.startCity, props.endCity)
             // this.setState({ coordinates, color: "red" })
         }
@@ -62,18 +49,11 @@ class Polyline extends React.Component {
 
         if (indexStartCity > indexEndCity) {
             newRouteCoordinates = viaGaronaCoordinates.slice(indexEndCity, indexStartCity + 1)
-            this.props.updateCoordinates(newRouteCoordinates)
-            // this.setState({ coordinates: newRouteCoordinates, color: 'green' })
+            this.setState({ coordinates: newRouteCoordinates, color: 'green' })
         } else if (indexEndCity > indexStartCity) {
             newRouteCoordinates = viaGaronaCoordinates.slice(indexStartCity, indexEndCity + 1)
-            this.props.updateCoordinates(newRouteCoordinates)
-            // this.setState({ coordinates: newRouteCoordinates, color: 'orange' })
+            this.setState({ coordinates: newRouteCoordinates, color: 'orange' })
         }
-        this.test = true
-        // console.log(newRouteCoordinates[0])
-        // console.log(newRouteCoordinates.length) 
-        this.props.onPropsPassed(newRouteCoordinates)
-
     }
 
     // Function to check if two objects are equals
@@ -106,27 +86,10 @@ class Polyline extends React.Component {
     render() {
         return (
             <MapView.Polyline
-                coordinates={this.props.routeCoordinates.coordinates}
-                // coordinates={this.state.coordinates}
+                coordinates={this.state.coordinates}
                 strokeColor={this.state.color ? this.state.color : "#000"} // fallback for when `strokeColors` is not supported by the map-provider
                 strokeWidth={4}
             />
         )
     } 
 }
-
-const mapStateToProps = state => {
-    console.log('mapStateToProps')
-    console.log(state)
-    
-    const { routeCoordinates } = state
-    return { routeCoordinates }
-}
-
-const mapDispatchToProps = dispatch => (
-    bindActionCreators({
-        updateCoordinates
-    }, dispatch)
-)
-
-export default connect(mapStateToProps, mapDispatchToProps)(Polyline)

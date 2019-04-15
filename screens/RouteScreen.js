@@ -1,20 +1,17 @@
 import React from 'react';
-import { View, ScrollView, Text, StyleSheet, Alert, CheckBox, ActivityIndicator, Picker } from 'react-native';
+import { View, ScrollView, Text, StyleSheet, Alert, ActivityIndicator, Picker } from 'react-native';
 import { MapView, Location, Permissions, IntentLauncherAndroid } from 'expo';
 import { widthPercentageToDP as width, heightPercentageToDP as height } from 'react-native-responsive-screen';
 
 import Polyline from '../components/route_screen/Polyline'
 
+import { CheckBox } from 'react-native-elements'
+
 const viaGaronaCoordinates = require('../data/viaGaronaCoordinates.json');
 const interestPoints = require('../data/centres_interets.json')
 
-// Redux implementation
-import { connect } from 'react-redux'
-// import { bindActionCreators } from 'redux'
-// import { updateCoordinates } from '../../Actions/RouteCoordinatesActions'
 
-
-class RouteScreen extends React.Component {
+export default class RouteScreen extends React.Component {
     static navigationOptions = {
         title: 'Route', // Don't know if it's usefull
     };
@@ -111,12 +108,11 @@ class RouteScreen extends React.Component {
         })
     }
 
-    fitMapToViaGaronnaCoordinates = () => {
-    // fitMapToViaGaronnaCoordinates = (p_coordinates) => {
+    fitMapToViaGaronnaCoordinates = (p_coordinates) => {
         console.log('fitMAPPs')
-        // console.log(p_coordinates.length)
+        console.log(p_coordinates.length)
         setTimeout(() => {
-            this.mapRef.fitToCoordinates(this.props.routeCoordinates.coordinates,
+            this.mapRef.fitToCoordinates(p_coordinates,
                 {
                     edgePadding: { top: 20, right: 20, bottom: 20, left: 20 },
                     animated: true
@@ -173,7 +169,7 @@ class RouteScreen extends React.Component {
 
         if (this.state.checkbox[p_interestPointType]) {
             if (p_interestPointType === "restaurants" || p_interestPointType === "commerces_vie_pratique") {
-                console.log('inside if')
+                console.log('inside if1')
 
                 for (let i = 0; i < interestPoints[p_interestPointType].length; i++) {
                     placesList.push(interestPoints[p_interestPointType][i])
@@ -184,7 +180,7 @@ class RouteScreen extends React.Component {
                     return this.renderPlaceMarker(place, index, p_interestPointType === "restaurants" ? "gold" : "orange")
                 })
             } else if (p_interestPointType === "hebergements") {
-                console.log('inside if')
+                console.log('inside if2')
 
                 for (let i = 0; i < interestPoints.hotels.length; i++) {
                     placesList.push(interestPoints.hotels[i])
@@ -242,10 +238,12 @@ class RouteScreen extends React.Component {
     renderInterestPointCheckbox(p_interestPointType, p_interestPointStringText) {
         return (
             <View style={styles.checkboxLineContainer}>
-                <Text>{p_interestPointStringText}</Text>
+                
                 <CheckBox
-                    value={this.state.checkbox[p_interestPointType]}
-                    onValueChange={() => this.updateCheckboxState(p_interestPointType)}
+                    title= {p_interestPointStringText}
+
+                    checked={this.state.checkbox[p_interestPointType]}
+                    onPress={() => this.updateCheckboxState(p_interestPointType)}
                 />
             </View>
         )
@@ -273,7 +271,7 @@ class RouteScreen extends React.Component {
                                 style={{ height: width(15), width: width(40) }}
                                 onValueChange={(itemValue, itemIndex) => {
                                     this.setState({ startCity: itemValue })
-                                    this.fitMapToViaGaronnaCoordinates()
+                                    this.fitMapToViaGaronnaCoordinates(viaGaronaCoordinates)
                                 }}
                             >
                                 {this.renderCitiesToPick("start")}
@@ -286,7 +284,7 @@ class RouteScreen extends React.Component {
                                 style={{ height: width(15), width: width(40) }}
                                 onValueChange={(itemValue, itemIndex) => {
                                     this.setState({ endCity: itemValue })
-                                    this.fitMapToViaGaronnaCoordinates()
+                                    this.fitMapToViaGaronnaCoordinates(viaGaronaCoordinates)
                                 }}
                             >
                                 {this.renderCitiesToPick("end")}
@@ -295,14 +293,14 @@ class RouteScreen extends React.Component {
                     </View>
                     <MapView
                         ref={ref => this.mapRef = ref}
-                        onMapReady={() => this.fitMapToViaGaronnaCoordinates()}
+                        onMapReady={() => this.fitMapToViaGaronnaCoordinates(viaGaronaCoordinates)}
                         style={{ alignSelf: 'stretch', height: height(60) }}
                         region={this.state.mapRegion}
                     >
                         <Polyline
                             startCity={this.state.startCity}
                             endCity={this.state.endCity}
-                            onPropsPassed={() => this.fitMapToViaGaronnaCoordinates()}
+                            onPropsPassed={this.fitMapToViaGaronnaCoordinates}
                         />
                         {this.renderUserLocationMarker()}
                         {this.renderInterestPointMarkers("restaurants")}
@@ -348,15 +346,6 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     }
 });
-
-const mapStateToProps = state => {
-    console.log('mapStateToProps')
-
-    const { routeCoordinates } = state
-    return { routeCoordinates }
-}
-
-export default connect(mapStateToProps)(RouteScreen)
 
 // available default marker color:
 // red(default )

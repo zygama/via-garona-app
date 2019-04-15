@@ -1,0 +1,52 @@
+export default data = [
+   {
+      id:181808,
+      poster_path:"../../assets/images/home/tabBar/map.png",
+      overview:"Avant de prendre la route, pensez à vérifier la météo sur l'intégralité du chemin.",
+   },
+   {
+      id:181809,
+      poster_path:"../../assets/images/home/tabBar/map.png",
+      overview:"Un téléphone, une bouteille d'eau c'est utile.",
+   },
+   {
+      id:181810,
+      poster_path:"../../assets/images/home/tabBar/map.png",
+      overview:"Prévenez un proche que vous partez randonnée, ou mieux : emmener le avec vous.",
+   },
+   {
+      id:181811,
+      poster_path:"../../assets/images/home/tabBar/map.png",
+      overview:"",
+   },
+   {
+      id:181812,
+      poster_path:"../../assets/images/home/tabBar/map.png",
+      overview:"",
+   },
+   {
+      id:181813,
+      poster_path:"../../assets/images/home/tabBar/map.png",
+      overview:"",
+   },
+   {
+      id:181814,
+      poster_path:"../../assets/images/home/tabBar/map.png",
+      overview:"",
+   },
+   {
+      id:181815,
+      poster_path:"../../assets/images/home/tabBar/map.png",
+      overview:"",
+   },
+   {
+      id:181816,
+      poster_path:"../../assets/images/home/tabBar/map.png",
+      overview:"",
+   },
+   {
+      id:181817,
+      poster_path:"../../assets/images/home/tabBar/map.png",
+      overview:"",
+   }
+]

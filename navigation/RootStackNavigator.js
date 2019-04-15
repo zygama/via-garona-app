@@ -9,6 +9,16 @@ import RouteScreen from '../screens/RouteScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import InterestPointDetailsScreen from '../screens/InterestPointDetailsScreen';
 
+import mainPointsInterets from '../screens/pointsInterets/mainPointsInterets';
+import mainItineraire from '../screens/itineraire/mainItineraire';
+import mainNavigation from '../screens/navigation/mainNavigation';
+import BurgerScreen from '../screens/BurgerScreen';
+import Wiki from '../screens/navigation/Wiki';
+import PointInteretCat from '../screens/pointsInterets/PointInteretCat';
+import PointInteretNom from '../screens/pointsInterets/PointInteretNom';
+import PointInteretVille from '../screens/pointsInterets/PointInteretVille';
+import PointInteretDetail from '../screens/pointsInterets/PointInteretDetail';
+
 // import MenuDrawer from '../components/MenuDrawer';
 
 // const WIDTH = Dimensions.get('window').width;
@@ -19,6 +29,7 @@ import InterestPointDetailsScreen from '../screens/InterestPointDetailsScreen';
 // 		return(<MenuDrawer navigation={navigation} />)
 // 	}
 // }
+
 
 const RouteStack = createStackNavigator({
     Route: {
@@ -42,6 +53,33 @@ const RootStackNavigator = createStackNavigator(
 		},
 		Settings: {
 			screen: SettingsScreen
+		},
+		MainPointsInterets :{
+			screen: mainPointsInterets
+		},
+		MainNavigation :{
+			screen: mainNavigation
+		},
+		MainItineraire :{
+			screen: mainItineraire
+		},
+		Burger: {
+			screen: BurgerScreen
+		},
+		Wiki: {
+			screen: Wiki
+		},
+		PointInteretCat: {
+			screen: PointInteretCat
+		},
+		PointInteretNom: {
+			screen: PointInteretNom
+		},
+		PointInteretVille: {
+			screen: PointInteretVille
+		},
+		PointInteretDetail: {
+			screen : PointInteretDetail
 		}
 	}, {
 		defaultNavigationOptions: {
