@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, ScrollView, Text, StyleSheet, Alert, CheckBox, ActivityIndicator, Picker } from 'react-native';
+import { View, ScrollView, Text, StyleSheet, Alert, ActivityIndicator, Picker } from 'react-native';
+import { CheckBox } from 'react-native-elements'
 import { MapView, Location, Permissions, IntentLauncherAndroid } from 'expo';
 import { widthPercentageToDP as width, heightPercentageToDP as height } from 'react-native-responsive-screen';
 
@@ -242,10 +243,10 @@ class RouteScreen extends React.Component {
     renderInterestPointCheckbox(p_interestPointType, p_interestPointStringText) {
         return (
             <View style={styles.checkboxLineContainer}>
-                <Text>{p_interestPointStringText}</Text>
                 <CheckBox
-                    value={this.state.checkbox[p_interestPointType]}
-                    onValueChange={() => this.updateCheckboxState(p_interestPointType)}
+                    title={p_interestPointStringText}
+                    checked={this.state.checkbox[p_interestPointType]}
+                    onPress={() => this.updateCheckboxState(p_interestPointType)}
                 />
             </View>
         )

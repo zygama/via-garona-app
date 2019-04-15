@@ -8,6 +8,9 @@ import {
     Image
 } from 'react-native';
 
+import Start_Image from '../assets/images/start/Start_Image.png'
+import Icon from 'react-native-vector-icons/MaterialIcons'
+
 // import styles from "../assets/Styles";
 
 //import MenuButton from '../components/MenuButton'
@@ -17,228 +20,119 @@ export default class HomeScreen extends React.Component {
     render() {
         return (
             <View style={styles.container}>
+
                 <ImageBackground
-                    source={require("../assets/images/home/background_home.jpg")}
-                    style={{ flex: 1 }}>
+                    source={Start_Image}
+                    style={styles.imagebackground}
+                >
+                    <View style={styles.carrecentre}>
 
-                    <View style={{ flex: 1, backgroundColor: 'rgba(100,100,100,0.6)' }}>
-                        <View style={styles.tabBar}>
-                                <TouchableHighlight
-                                    style={styles.highlighter}
-                                    underlayColor='grey'
-                                    onPress={() => this.props.navigation.navigate('Route')}>
-                                    <View style={styles.tabBarImageAndText}>
-                                        <Image
-                                            style={[styles.image, styles.whiteIcon, styles.tabBarImage]}
-                                            source={require("../assets/images/home/tabBar/map.png")}
-                                        />
-                                        <Text style={styles.tabBarTitle}>Itinéraire</Text>
-                                    </View>
-                                </TouchableHighlight>
+                        <Text style={styles.titre}> Pour utiliser cette application </Text>
 
-                                <TouchableHighlight
-                                    style={styles.highlighter}
-                                    underlayColor='grey'
-                                    onPress={() => this.props.navigation.navigate('Settings')}>
-                                    <View style={styles.tabBarImageAndText}>
-                                        <Image
-                                        style={[styles.image, styles.whiteIcon, styles.tabBarImage]}
-                                        source={require("../assets/images/home/tabBar/icon-map-marker.png")}
-                                        />
-                                        <Text style={styles.tabBarTitle}>Points d'intérêts</Text>
-                                    </View>
-                                </TouchableHighlight>
-
-                                <TouchableHighlight
-                                    style={styles.highlighter}
-                                    underlayColor='grey'
-                                    onPress={() => this.props.navigation.navigate('Settings')}>
-                                    <View style={styles.tabBarImageAndText}>
-                                        <Image
-                                        style={[styles.image, styles.whiteIcon, styles.tabBarImage]}
-                                        source={require("../assets/images/home/tabBar/arrow.png")}
-                                        />
-                                        <Text style={styles.tabBarTitle}>Navigation</Text>
-                                    </View>
-                                </TouchableHighlight>
+                        <View style={styles.options}>
+                            <TouchableHighlight
+                                style={styles.highlighter}
+                                underlayColor='grey'
+                                onPress={() => this.props.navigation.navigate('MainItineraire')}>
+                                <View style={styles.option}>
+                                    <Icon style={styles.icon} name="location-on" size={40} color="#1F5070" />
+                                    <View style={styles.border}><Text style={styles.sousTitre}> Activer la géolocatisation </Text></View>
+                                </View>
+                            </TouchableHighlight>
+                            <TouchableHighlight
+                                style={styles.highlighter}
+                                underlayColor='grey'
+                                onPress={() => this.props.navigation.navigate('MainItineraire')}>
+                                <View style={styles.option}>
+                                    <Icon style={styles.icon} name="edit-location" size={40} color="#1F5070" />
+                                    <View style={styles.border}><Text style={styles.sousTitre}> Choisir un points de départ </Text></View>
+                                </View>
+                            </TouchableHighlight>
                         </View>
 
-                        <View style={{
-                            borderBottomColor: 'white',
-                            borderBottomWidth: 3,
-                            marginTop: 10,
-                            marginLeft: 30,
-                            marginRight: 30
-                        }}
-                        />
-
-                        <View style={styles.listFunc}>
-                            <Text style={styles.listTitle}>Navigation</Text>
-
-                            <View style={styles.listFuncLink}>
-                                <Image
-                                    style={[styles.image, styles.whiteIcon, styles.listFuncImage]}
-                                    source={{ uri: "https://image.flaticon.com/icons/png/512/130/130188.png" }}
-                                />
-                                <Text style={styles.listFuncTitle}>Vos randonnées</Text>
-                            </View>
-
-                            <View style={styles.listFuncLink}>
-                                <Image
-                                    style={[styles.image, styles.whiteIcon, styles.listFuncImage]}
-                                    source={{ uri: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Cog_font_awesome.svg/512px-Cog_font_awesome.svg.png" }}
-                                />
-                                <Text style={styles.listFuncTitle}>Réglages</Text>
-                            </View>
-
-                            <View style={styles.listFuncLink}>
-                                <Image
-                                    style={[styles.image, styles.whiteIcon, styles.listFuncImage]}
-                                    source={{ uri: "https://static.thenounproject.com/png/370619-200.png" }}
-                                />
-                                <Text style={styles.listFuncTitle}>Wiki</Text>
-                            </View>
-                        </View>
                     </View>
 
                 </ImageBackground>
+
             </View>
+            
         );
     }
 }
 
-const styles = StyleSheet.create({  
-	/*
-	*
-	*CONTAINER*/
-    container: {
-        flex: 1,
-        backgroundColor: '#000000',
-        opacity: 1
-    },
-    main_container: {
-        flex: 6
-    },
-	/*
-	*
-	*HEADER*/
-    header: {
-        flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        alignItems: 'center',
-        backgroundColor: 'rgba(115, 0, 125, 0.5)',
-        paddingTop: 25,
-        paddingBottom: 5
-    },
-    headerImage: {
-        width: 50,
-        height: 50,
-    },
-	/*
-	*
-	*TABBAR*/
-    tabBar: {
-        flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        alignItems: 'center',
-        marginTop: 10,
-        padding: 10
-    },
+const styles = StyleSheet.create({
+    
+    // CONTAINER
+   container: {
+   flex: 1,
+   backgroundColor: '#000000',
+   opacity: 1,
+   },
+
+   //HIGHLIGHTER
     highlighter: {
         borderRadius: 15
     },
-    tabBarLink: {
-        flexDirection: 'column',
-    },
-    tabBarTitle: {
-        textAlign: 'center',
-        color: 'white',
-        marginTop: 10
-    },
-    tabBarImage: {
-        padding: 5
-    },
-    tabBarImageAndText: {
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-	/*
-	*
-	*LISTFUNC*/
-    listFunc: {
-        flex: 3,
-        flexDirection: 'column',
-        justifyContent: 'space-around',
-        marginTop: 10,
-        // backgroundColor: '#DE7947',
-        // backgroundColor: 'rgba(222, 121, 71, 0.5)',
-        padding: 10
-    },
-    listFuncLink: {
+    
+    imagebackground:{
+        width: '100%',
+        height: '100%',
+        display : 'flex',
+        alignItems : 'center',
+      },
+    // LE CARRE DU CENTRE
+      carrecentre: {
+        width : '90%',
+        minHeight : '50%',
+        backgroundColor: '#FFFFFF',
+        borderRadius: 10,
+        padding : 20,
+        marginTop : 100, 
+        display: 'flex',       
+      },
+    
+      titre:{
+        textAlign	: 'center',
+        fontSize : 25,
+        fontWeight : 'bold',
+        color : '#221919',
+        flex: 1
+      },
+
+       // LES OPTIONS 
+       options:{
+        width: '80%',
+        display: 'flex', 
+        justifyContent : 'center',
+        alignSelf: 'center',
+        //alignItems: 'center', 
+        flex: 2,
+        //backgroundColor: 'blue',
+       },
+
+       option: {
+        display: 'flex',
         flexDirection: 'row',
+        // justifyContent : 'center',
         alignItems: 'center',
-    },
-    listTitle: {
+        // height: '50%',
+        //backgroundColor: 'pink',
+       },
+
+       border:{
+        borderLeftColor: 'black',
+        borderLeftWidth : 3, 
+        // borderLeftStyle : 'solid',
+        height: '100%', 
+        justifyContent: 'center',
+        //backgroundColor: 'green',
+       },
+
+       sousTitre: {
+        fontSize: 20,
         textAlign: 'center',
-        fontSize: 25,
-        color: 'white',
-    },
-    listFuncTitle: {
-        flex: 3,
-        backgroundColor: 'transparent',
-        textAlign: 'left',
-        color: 'white',
-        fontSize: 18,
-        paddingLeft: 20
-    },
-    listFuncImage: {
-        flex: 1
-    },
-	/*
-	*
-	*IMAGES*/
-    image: {
-        width: 80,
-        height: 80,
-        resizeMode: 'contain',
-    },
-    whiteIcon: {
-        tintColor: 'white',
-    },
-	/*
-	*
-	*BURGER*/
-    burger: {
-        padding: 20,
-        paddingLeft: 50,
-        // paddingTop: 80,
-        backgroundColor: '#666',
-        flex: 1
-    },
-    headerBurger: {
-        backgroundColor: '#527AFD',
-        flex: 1
-    },
-    contentBurger: {
-        backgroundColor: '#201E51',
-        flex: 4
-    },
-    contentBurgerImage: {
-        width: 15,
-        height: 15,
-    },
+        //backgroundColor: 'blue', 
+       }
+	
 });
 
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: '#fff',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-//   text: {
-//     fontSize: 30,
-//   }
-// });
