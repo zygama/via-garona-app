@@ -1,7 +1,6 @@
-export const updateCoordinates = (newCoordinates) => {
-    console.log('actions coor')
-    return {
+export const updateCoordinates = (newCoordinates) => (
+    {
         type: 'UPDATE_COORDINATES',
         payload: newCoordinates
     }
-}
+)

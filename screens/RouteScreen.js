@@ -116,7 +116,7 @@ class RouteScreen extends React.Component {
         console.log('fitMAPPs')
         // console.log(p_coordinates.length)
         setTimeout(() => {
-            this.mapRef.fitToCoordinates(this.props.routeCoordinates,
+            this.mapRef.fitToCoordinates(this.props.routeCoordinates.coordinates,
                 {
                     edgePadding: { top: 20, right: 20, bottom: 20, left: 20 },
                     animated: true
@@ -349,13 +349,11 @@ const styles = StyleSheet.create({
     }
 });
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
     console.log('mapStateToProps')
-    // console.log(state)
-    const { routeCoordinates } = state
-    return routeCoordinates
 
-    // return { routeCoordinates: state.routeCoordinates }
+    const { routeCoordinates } = state
+    return { routeCoordinates }
 }
 
 export default connect(mapStateToProps)(RouteScreen)

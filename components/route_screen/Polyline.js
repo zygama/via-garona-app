@@ -106,7 +106,7 @@ class Polyline extends React.Component {
     render() {
         return (
             <MapView.Polyline
-                coordinates={this.props.routeCoordinates}
+                coordinates={this.props.routeCoordinates.coordinates}
                 // coordinates={this.state.coordinates}
                 strokeColor={this.state.color ? this.state.color : "#000"} // fallback for when `strokeColors` is not supported by the map-provider
                 strokeWidth={4}
@@ -115,13 +115,12 @@ class Polyline extends React.Component {
     } 
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
     console.log('mapStateToProps')
-    // console.log(state)
+    console.log(state)
+    
     const { routeCoordinates } = state
-    return routeCoordinates
-
-    // return { routeCoordinates: state.routeCoordinates }
+    return { routeCoordinates }
 }
 
 const mapDispatchToProps = dispatch => (
