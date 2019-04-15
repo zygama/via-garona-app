@@ -12,7 +12,7 @@ import InterestPointDetailsScreen from '../screens/InterestPointDetailsScreen';
 import mainPointsInterets from '../screens/pointsInterets/mainPointsInterets';
 import mainItineraire from '../screens/itineraire/mainItineraire';
 import mainNavigation from '../screens/navigation/mainNavigation';
-// import BurgerScreen from '../screens/BurgerScreen';
+import BurgerScreen from '../screens/BurgerScreen';
 import Wiki from '../screens/navigation/Wiki';
 import PointInteretCat from '../screens/pointsInterets/PointInteretCat';
 import PointInteretNom from '../screens/pointsInterets/PointInteretNom';
@@ -37,7 +37,6 @@ const RootStackNavigator = createStackNavigator(
 			screen: HomeScreen
 		},
 		Route: {
-            // screen: RouteScreen
             screen: RouteStack
 		},
 		Settings: {
@@ -52,9 +51,9 @@ const RootStackNavigator = createStackNavigator(
         MainItineraire: {
             screen: mainItineraire
         },
-        // Burger: {
-        //     screen: BurgerScreen
-        // },
+        Burger: {
+            screen: BurgerScreen
+        },
         Wiki: {
             screen: Wiki
         },
@@ -86,7 +85,7 @@ const RootStackNavigator = createStackNavigator(
 			),
 			headerTitle: (
 				<Image
-					source={require('../assets/images/header/via_garona_logo.png')}
+					source={require('../assets/images/header/via_garonna_logo.png')}
 					style={{ flex: 1, width: 65, height: 65, resizeMode: 'contain' }}
 				/>
 			),

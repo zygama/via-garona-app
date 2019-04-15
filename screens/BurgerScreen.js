@@ -7,9 +7,7 @@ import {
     TouchableHighlight,
     Image
 } from 'react-native';
-// import FontAwesomeIcons, { Icons } from 'react-native-fontawesome';
-import FontAwesome, { Icons } from 'react-native-vector-icons';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+
 
 export default class BurgerScreen extends React.Component {
     static navigationOptions = {
@@ -24,7 +22,7 @@ export default class BurgerScreen extends React.Component {
                 style={{ flex: 1, justifyContent: 'center' }}
                 onPress={() => this.props.navigation.navigate('Home')}>
                     <Image
-                        source={require('../assets/images/header/via_garona_logo.png')}
+                        source={require('../assets/images/header/via_garonna_logo.png')}
                         style={{ flex: 1, marginRight: 0, marginLeft: 0, resizeMode: 'contain' }}
                     />
                 </TouchableHighlight>
