@@ -82,7 +82,7 @@ export default class mainPointsInterets extends React.Component {
                             <TouchableHighlight
                                 style={styles.highlighter}
                                 underlayColor='grey'
-                                onPress={() => this.props.navigation.navigate('PointInteretTest')}>
+                                onPress={() => this.props.navigation.navigate('PointInteretVille')}>
                             <View style={styles.listFuncLink}>
                                 <Image
                                     style={[styles.image, styles.whiteIcon, styles.listFuncImage]}

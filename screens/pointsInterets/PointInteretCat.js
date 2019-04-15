@@ -11,7 +11,7 @@ const interestPoints = require('../../data/centres_interets.json')
 
 export default class PointInteret extends React.Component {
     static navigationOptions = {
-    title: 'app.json',
+    title: 'PointInteretCat',
     };
 
     constructor(props) {
@@ -101,10 +101,13 @@ renderInterestPointItem(p_place, p_index, p_color) {
           source={{uri: 'https://static.wamiz.fr/images/news/facebook/article/age-adulte-acc-fb-5915c5fca3f43.jpg'}}
         /> 
         
-        {/* <TouchableHighlight
+        <TouchableHighlight
           style={styles.highlighter}
           underlayColor='grey'
-          onPress={() => this.props.navigation.navigate('MainPointsInterets')}> */}
+          onPress={() => this.props.navigation.navigate('PointInteretDetail',{
+            placeDetails: p_place
+            })}
+        >
           <View style={styles.content_container}>
 
             <View style={styles.header_container}>
@@ -116,7 +119,7 @@ renderInterestPointItem(p_place, p_index, p_color) {
               <Text style={styles.description_text}>{p_place.adresse}</Text>
             </View>
           </View>
-        {/* </TouchableHighlight> */}
+        </TouchableHighlight>
       </View>
     )
 }

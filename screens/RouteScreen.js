@@ -1,12 +1,11 @@
 import React from 'react';
-import { View, ScrollView, Text, StyleSheet, Alert,  ActivityIndicator, Picker } from 'react-native';
+import { View, ScrollView, Text, StyleSheet, Alert, ActivityIndicator, Picker } from 'react-native';
 import { MapView, Location, Permissions, IntentLauncherAndroid } from 'expo';
 import { widthPercentageToDP as width, heightPercentageToDP as height } from 'react-native-responsive-screen';
 
 import Polyline from '../components/route_screen/Polyline'
 
 import { CheckBox } from 'react-native-elements'
-
 
 const viaGaronaCoordinates = require('../data/viaGaronaCoordinates.json');
 const interestPoints = require('../data/centres_interets.json')
@@ -170,7 +169,7 @@ export default class RouteScreen extends React.Component {
 
         if (this.state.checkbox[p_interestPointType]) {
             if (p_interestPointType === "restaurants" || p_interestPointType === "commerces_vie_pratique") {
-                console.log('inside if')
+                console.log('inside if1')
 
                 for (let i = 0; i < interestPoints[p_interestPointType].length; i++) {
                     placesList.push(interestPoints[p_interestPointType][i])
@@ -181,7 +180,7 @@ export default class RouteScreen extends React.Component {
                     return this.renderPlaceMarker(place, index, p_interestPointType === "restaurants" ? "gold" : "orange")
                 })
             } else if (p_interestPointType === "hebergements") {
-                console.log('inside if')
+                console.log('inside if2')
 
                 for (let i = 0; i < interestPoints.hotels.length; i++) {
                     placesList.push(interestPoints.hotels[i])
@@ -239,7 +238,7 @@ export default class RouteScreen extends React.Component {
     renderInterestPointCheckbox(p_interestPointType, p_interestPointStringText) {
         return (
             <View style={styles.checkboxLineContainer}>
-                {/* <Text>{p_interestPointStringText}</Text> */}
+                
                 <CheckBox
                     title= {p_interestPointStringText}
 

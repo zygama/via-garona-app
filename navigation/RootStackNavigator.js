@@ -16,7 +16,8 @@ import BurgerScreen from '../screens/BurgerScreen';
 import Wiki from '../screens/navigation/Wiki';
 import PointInteretCat from '../screens/pointsInterets/PointInteretCat';
 import PointInteretNom from '../screens/pointsInterets/PointInteretNom';
-import PointInteretTest from '../screens/pointsInterets/PointInteretTest';
+import PointInteretVille from '../screens/pointsInterets/PointInteretVille';
+import PointInteretDetail from '../screens/pointsInterets/PointInteretDetail';
 
 // import MenuDrawer from '../components/MenuDrawer';
 
@@ -28,6 +29,7 @@ import PointInteretTest from '../screens/pointsInterets/PointInteretTest';
 // 		return(<MenuDrawer navigation={navigation} />)
 // 	}
 // }
+
 
 const RouteStack = createStackNavigator({
     Route: {
@@ -73,11 +75,11 @@ const RootStackNavigator = createStackNavigator(
 		PointInteretNom: {
 			screen: PointInteretNom
 		},
-		PointInteretTest: {
-			screen: PointInteretTest
+		PointInteretVille: {
+			screen: PointInteretVille
 		},
-		InterestDetails: {
-			screen: InterestPointDetailsScreen
+		PointInteretDetail: {
+			screen : PointInteretDetail
 		}
 	}, {
 		defaultNavigationOptions: {
