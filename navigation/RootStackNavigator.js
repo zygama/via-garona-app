@@ -9,13 +9,6 @@ import RouteScreen from '../screens/RouteScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import InterestPointDetailsScreen from '../screens/InterestPointDetailsScreen';
 
-import mainPointsInterets from '../screens/pointsInterets/mainPointsInterets';
-import mainItineraire from '../screens/itineraire/mainItineraire';
-import mainNavigation from '../screens/navigation/mainNavigation';
-import BurgerScreen from '../screens/BurgerScreen';
-import Wiki from '../screens/navigation/Wiki';
-import PointInteret from '../screens/pointsInterets/PointInteret';
-
 // import MenuDrawer from '../components/MenuDrawer';
 
 // const WIDTH = Dimensions.get('window').width;
@@ -49,27 +42,6 @@ const RootStackNavigator = createStackNavigator(
 		},
 		Settings: {
 			screen: SettingsScreen
-		},
-		MainPointsInterets :{
-			screen: mainPointsInterets
-		},
-		MainNavigation :{
-			screen: mainNavigation
-		},
-		MainItineraire :{
-			screen: mainItineraire
-		},
-		Burger: {
-			screen: BurgerScreen
-		},
-		Wiki: {
-			screen: Wiki
-		},
-		PointInteret: {
-			screen: PointInteret
-		},
-		InterestDetails: {
-			screen: InterestPointDetailsScreen
 		}
 	}, {
 		defaultNavigationOptions: {
