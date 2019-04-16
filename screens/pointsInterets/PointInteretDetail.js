@@ -26,25 +26,25 @@ export default class PointInteretDetail extends React.Component {
 
     addInterestPointToFavorites(p_interestPoint) {
         console.log(p_interestPoint)
-        const favoritesFileContent = favoritesInterestPoint
-        favoritesFileContent.push(p_interestPoint)
-        const jsonPath = '../../data/favorites_interest_points.json'
-        let obj
+        // const favoritesFileContent = favoritesInterestPoint
+        // favoritesFileContent.push(p_interestPoint)
+        // const jsonPath = '../../data/favorites_interest_points.json'
+        // let obj
 
-        fs.readFile(jsonPath, 'utf8', (err, data) => {
-            if (err) {
-                console.log(err);
-            } else {
-                obj = JSON.parse(data); // now it an object
-                console.log(obj)
-                obj.push(p_interestPoint)
-                // obj.table.push({ id: 2, square: 3 }); // add some data
-                const json = JSON.stringify(obj); // convert it back to json
-                fs.writeFile(jsonPath, json, 'utf8', (error) => {
-                    if (error) throw err;
-                }); // write it back
-            }
-        });
+        // fs.readFile(jsonPath, 'utf8', (err, data) => {
+        //     if (err) {
+        //         console.log(err);
+        //     } else {
+        //         obj = JSON.parse(data); // now it an object
+        //         console.log(obj)
+        //         obj.push(p_interestPoint)
+        //         // obj.table.push({ id: 2, square: 3 }); // add some data
+        //         const json = JSON.stringify(obj); // convert it back to json
+        //         fs.writeFile(jsonPath, json, 'utf8', (error) => {
+        //             if (error) throw err;
+        //         }); // write it back
+        //     }
+        // });
     }
 
     render() {
