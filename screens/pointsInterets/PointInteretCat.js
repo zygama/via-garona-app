@@ -6,8 +6,6 @@ import {
 
 import { CheckBox } from 'react-native-elements'
 
-import PointInteretItem from './PointInteretItem';
-// import styles from "./Styles"
 
 const interestPoints = require('../../data/centres_interets.json')
 
@@ -32,7 +30,7 @@ export default class PointInteret extends React.Component {
 
 
     updateCheckboxState(p_interestPointType) {
-        let actualState = { ...this.state }
+        const actualState = { ...this.state }
 
         actualState.checkbox[p_interestPointType] = !actualState.checkbox[p_interestPointType]
         this.setState({ actualState })
@@ -42,21 +40,20 @@ export default class PointInteret extends React.Component {
     // Render the "restaurants" markers
     renderInterestPointMarkers(p_interestPointType) {
         // TODO: mettre if this.state.[] au dessus du bloc de if else
-        let placesList = []
+        const placesList = []
 
         if (this.state.checkbox[p_interestPointType]) {
-            if (p_interestPointType === "restaurants" || p_interestPointType === "commerces_vie_pratique") {
+            if (p_interestPointType === 'restaurants' || p_interestPointType === 'commerces_vie_pratique') {
                 console.log('inside if')
 
                 for (let i = 0; i < interestPoints[p_interestPointType].length; i++) {
                     placesList.push(interestPoints[p_interestPointType][i])
                 }
 
-                return placesList.map((place, index) => {
+                return placesList.map((place, index) =>
                     // console.log(place.lat)
-                    return this.renderInterestPointItem(place, index, p_interestPointType === "restaurants" ? "gold" : "orange")
-                })
-            } else if (p_interestPointType === "hebergements") {
+                    this.renderInterestPointItem(place, index, p_interestPointType === 'restaurants' ? 'gold' : 'orange'))
+            } else if (p_interestPointType === 'hebergements') {
                 console.log('inside if')
 
                 for (let i = 0; i < interestPoints.hotels.length; i++) {
@@ -66,11 +63,10 @@ export default class PointInteret extends React.Component {
                     placesList.push(interestPoints.campings[j])
                 }
 
-                return placesList.map((place, index) => {
+                return placesList.map((place, index) =>
                     // console.log(place.lat)
-                    return this.renderInterestPointItem(place, index, "green")
-                })
-            } else if (p_interestPointType === "points_interets") {
+                    this.renderInterestPointItem(place, index, 'green'))
+            } else if (p_interestPointType === 'points_interets') {
                 console.log('inside if points_interets')
 
                 for (let i = 0; i < interestPoints.loisirs.length; i++) {
@@ -83,16 +79,15 @@ export default class PointInteret extends React.Component {
                     placesList.push(interestPoints.activites_sportives[k])
                 }
 
-                return placesList.map((place, index) => {
-                    return this.renderInterestPointItem(place, index, "violet")
-                })
+                return placesList.map((place, index) => this.renderInterestPointItem(place, index, 'violet'))
             } else {
                 return false
             }
         }
     }
 
-    renderInterestPointItem(p_place, p_index, p_color) {
+    renderInterestPointItem(p_place, p_index) {
+        console.log(p_place)
         return (
             <View
                 key={p_index}
@@ -105,7 +100,7 @@ export default class PointInteret extends React.Component {
 
                 <TouchableHighlight
                     style={styles.highlighter}
-                    underlayColor='grey'
+                    underlayColor="grey"
                     onPress={() => this.props.navigation.navigate('PointInteretDetail', {
                         placeDetails: p_place
                     })}
@@ -129,7 +124,6 @@ export default class PointInteret extends React.Component {
     renderInterestPointCheckbox(p_interestPointType, p_interestPointStringText) {
         return (
             <View style={styles.checkboxLineContainer}>
-                {/* <Text>{p_interestPointStringText}</Text> */}
                 <CheckBox
                     title={p_interestPointStringText}
 
@@ -144,17 +138,17 @@ export default class PointInteret extends React.Component {
         return (
             <View style={styles.container}>
                 <View style={styles.checkboxsContainer}>
-                    {this.renderInterestPointCheckbox("restaurants", "Restauration")}
-                    {this.renderInterestPointCheckbox("commerces_vie_pratique", "Commerces et vie pratique")}
-                    {this.renderInterestPointCheckbox("hebergements", "Hebergements")}
-                    {this.renderInterestPointCheckbox("points_interets", "Points d'\intérêt")}
+                    {this.renderInterestPointCheckbox('restaurants', 'Restauration')}
+                    {this.renderInterestPointCheckbox('commerces_vie_pratique', 'Commerces et vie pratique')}
+                    {this.renderInterestPointCheckbox('hebergements', 'Hebergements')}
+                    {this.renderInterestPointCheckbox('points_interets', "Points d'\intérêt")}
                 </View>
                 <ScrollView>
                     {/* {this.renderUserLocationMarker()} */}
-                    {this.renderInterestPointMarkers("restaurants")}
-                    {this.renderInterestPointMarkers("commerces_vie_pratique")}
-                    {this.renderInterestPointMarkers("hebergements")}
-                    {this.renderInterestPointMarkers("points_interets")}
+                    {this.renderInterestPointMarkers('restaurants')}
+                    {this.renderInterestPointMarkers('commerces_vie_pratique')}
+                    {this.renderInterestPointMarkers('hebergements')}
+                    {this.renderInterestPointMarkers('points_interets')}
                 </ScrollView>
 
             </View>
@@ -162,9 +156,9 @@ export default class PointInteret extends React.Component {
     }
 }
 const styles = StyleSheet.create({
-	/*
+    /*
 	*
-	*CONTAINER*/
+	*CONTAINER */
     container: {
         flex: 1,
         backgroundColor: '#000000',
@@ -173,9 +167,9 @@ const styles = StyleSheet.create({
     highlighter: {
         borderRadius: 15
     },
-	/*
+    /*
 	*
-    *LISTFUNC*/
+    *LISTFUNC */
     listHeader: {
         // flex: 1,
         flexDirection: 'row',
@@ -211,9 +205,9 @@ const styles = StyleSheet.create({
         height: 50,
         width: 50,
     },
-	/*
+    /*
 	*
-	*IMAGES*/
+	*IMAGES */
     image: {
         width: 80,
         height: 80,

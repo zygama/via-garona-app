@@ -9,10 +9,9 @@ import {
     TextInput,
     Button,
 } from 'react-native';
+
 import pointInteret from '../../data/PtsInteret.json';
 require('string_score')
-
-
 import { toLowerCaseWithoutAccents } from '../../utils/functions'
 
 
@@ -35,10 +34,10 @@ export default class PointInteretVille extends React.Component {
 
     _loadPtsInteret() {
         let pointsInteretsFound = []
+
         for (let i = 0; i < this.dataSource.length; i++) {
             let inputString = toLowerCaseWithoutAccents(this.state.searchedText)
             let actualPointInteret = toLowerCaseWithoutAccents(this.dataSource[i].commune)
-
 
             if (actualPointInteret.score(inputString) >= 0.35) {
                 console.log(inputString)
@@ -46,12 +45,8 @@ export default class PointInteretVille extends React.Component {
                 console.log(actualPointInteret.score(inputString))
                 pointsInteretsFound.push(this.dataSource[i])
             }
-            // if (inputString === actualPointInteret) {
-            //     pointsInteretsFound.push(this.dataSource[i])
-            // }
         }
         this.setState({ pointsInteretsFound })
-
     }
 
     render() {

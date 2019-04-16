@@ -1,13 +1,14 @@
 import React from 'react';
-import { Dimensions, Image, Text } from 'react-native';
-import { createDrawerNavigator, createStackNavigator } from 'react-navigation';
+import { Image } from 'react-native';
+import { createStackNavigator } from 'react-navigation';
+// import { createDrawerNavigator, createStackNavigator } from 'react-navigation';
 import { widthPercentageToDP as width } from 'react-native-responsive-screen';
- 
+
 
 import HomeScreen from '../screens/HomeScreen';
-import RouteScreen from '../screens/RouteScreen';
+import RouteScreen from '../screens/itineraire/RouteScreen';
+import RouteByTimeScreen from '../screens/itineraire/RouteByTimeScreen';
 import SettingsScreen from '../screens/SettingsScreen';
-import InterestPointDetailsScreen from '../screens/InterestPointDetailsScreen';
 
 import mainPointsInterets from '../screens/pointsInterets/mainPointsInterets';
 import mainItineraire from '../screens/itineraire/mainItineraire';
@@ -32,15 +33,18 @@ const RouteStack = createStackNavigator({
 })
 
 const RootStackNavigator = createStackNavigator(
-	{
-		Home: {
-			screen: HomeScreen
-		},
-		Route: {
+    {
+        Home: {
+            screen: HomeScreen
+        },
+        Route: {
             screen: RouteStack
-		},
-		Settings: {
-			screen: SettingsScreen
+        },
+        Settings: {
+            screen: SettingsScreen
+        },
+        RouteByTime: {
+            screen: RouteByTimeScreen
         },
         MainPointsInterets: {
             screen: mainPointsInterets
@@ -69,37 +73,37 @@ const RootStackNavigator = createStackNavigator(
         PointInteretDetail: {
             screen: PointInteretDetail
         }
-	}, {
-		defaultNavigationOptions: {
-			headerLeft: (
-				<Image
-					source={require('../assets/images/header/sapins.png')}
-					style={{ flex: 1, width: 50, height: 50, resizeMode: 'contain', tintColor: 'white', marginLeft: 20 }}
-				/>
-			),
-			headerRight: (
-				<Image
-					source={require('../assets/images/header/burger.png')}
-					style={{ flex: 1, width: 50, height: 50, resizeMode: 'contain', tintColor: 'white', marginRight: 20 }}
-				/>
-			),
-			headerTitle: (
-				<Image
-					source={require('../assets/images/header/via_garonna_logo.png')}
-					style={{ flex: 1, width: 65, height: 65, resizeMode: 'contain' }}
-				/>
-			),
-			headerStyle: {
-				backgroundColor: '#1F5070',
-				height: width(20)
-			},
-			headerTintColor: '#fff',
-			headerTitleStyle: {
-				fontWeight: 'bold',
-				fontFamily: 'Roboto'
-			}
-		}
-	}
+    }, {
+        defaultNavigationOptions: {
+            headerLeft: (
+                <Image
+                    source={require('../assets/images/header/sapins.png')}
+                    style={{ flex: 1, width: 50, height: 50, resizeMode: 'contain', tintColor: 'white', marginLeft: 20 }}
+                />
+            ),
+            headerRight: (
+                <Image
+                    source={require('../assets/images/header/burger.png')}
+                    style={{ flex: 1, width: 50, height: 50, resizeMode: 'contain', tintColor: 'white', marginRight: 20 }}
+                />
+            ),
+            headerTitle: (
+                <Image
+                    source={require('../assets/images/header/via_garonna_logo.png')}
+                    style={{ flex: 1, width: 65, height: 65, resizeMode: 'contain' }}
+                />
+            ),
+            headerStyle: {
+                backgroundColor: '#1F5070',
+                height: width(20)
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+                fontWeight: 'bold',
+                fontFamily: 'Roboto'
+            }
+        }
+    }
 );
 
-export default RootStackNavigator;
+export default RootStackNavigator

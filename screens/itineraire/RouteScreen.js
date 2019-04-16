@@ -1,24 +1,55 @@
 import React from 'react';
-import { View, ScrollView, Text, StyleSheet, Alert, ActivityIndicator, Picker } from 'react-native';
+import {
+    View,
+    ScrollView,
+    Text,
+    StyleSheet,
+    Alert,
+    ActivityIndicator,
+    Picker
+} from 'react-native';
+import {
+    MapView,
+    Location,
+    Permissions,
+    IntentLauncherAndroid
+} from 'expo';
 import { CheckBox } from 'react-native-elements'
-import { MapView, Location, Permissions, IntentLauncherAndroid } from 'expo';
 import { widthPercentageToDP as width, heightPercentageToDP as height } from 'react-native-responsive-screen';
-
-import Polyline from '../components/route_screen/Polyline'
-
-// const viaGaronaCoordinates = require('../data/viaGaronaCoordinates.json');
-const interestPoints = require('../data/centres_interets.json')
-
 // Redux implementation
 import { connect } from 'react-redux'
-// import { bindActionCreators } from 'redux'
-// import { updateCoordinates } from '../../Actions/RouteCoordinatesActions'
+
+import Polyline from '../../components/route_screen/Polyline'
+
+// const viaGaronaCoordinates = require('../data/viaGaronaCoordinates.json');
+const interestPoints = require('../../data/centres_interets.json')
+const jsonCities = require('../../data/villes.json')
 
 
 class RouteScreen extends React.Component {
+    static showAlertLocationMustBeEnabled(p_onPressFunction) {
+        return new Promise((resolve) => {
+            Alert.alert(
+                'La localisation n\'est pas activée',
+                'Veuillez s\'il vous plait activer la localisation dans les paramètres'
+                + 'afin d\'afficher votre position sur la carte',
+                [
+                    {
+                        text: 'OK', onPress: () => {
+                            p_onPressFunction()
+                            console.log('futur resolve')
+                            resolve()
+                        }
+                    },
+                ],
+                { cancelable: false }
+            )
+        })
+    }
+
     static navigationOptions = {
         title: 'Route', // Don't know if it's usefull
-    };
+    }
 
     constructor(props) {
         super(props)
@@ -50,8 +81,7 @@ class RouteScreen extends React.Component {
     }
 
     getLocationAsync = async () => {
-        let { status } = await Permissions.askAsync(Permissions.LOCATION);
-
+        const { status } = await Permissions.askAsync(Permissions.LOCATION);
         console.log(status)
 
         if (status !== 'granted') {
@@ -64,11 +94,11 @@ class RouteScreen extends React.Component {
         // one of gpsAvailable or locationServicesEnabled is false
         // We so need to assure that both are true with Expo.IntentLauncherAndroid
         // by opening the location setting and enable it
-        let providerStatusAsync = await Location.getProviderStatusAsync()
+        const providerStatusAsync = await Location.getProviderStatusAsync()
         if (providerStatusAsync.gpsAvailable === false
             || providerStatusAsync.locationServicesEnabled === false) {
-            // open 
-            this.showAlertLocationMustBeEnabled(async () => {
+            // open
+            RouteScreen.showAlertLocationMustBeEnabled(async () => {
                 await IntentLauncherAndroid.startActivityAsync(
                     IntentLauncherAndroid.ACTION_LOCATION_SOURCE_SETTINGS
                 );
@@ -83,7 +113,7 @@ class RouteScreen extends React.Component {
     };
 
     getLocationWithPermissions = async () => {
-        let location = await Location.getCurrentPositionAsync({});
+        const location = await Location.getCurrentPositionAsync({});
         console.log(location);
         this.setState({
             location: {
@@ -93,24 +123,6 @@ class RouteScreen extends React.Component {
         });
     }
 
-    showAlertLocationMustBeEnabled(p_onPressFunction) {
-        return new Promise((resolve) => {
-            Alert.alert(
-                'La localisation n\'est pas activée',
-                'Veuillez s\'il vous plait activer la localisation dans les paramètres afin d\'afficher votre position sur la carte',
-                [
-                    {
-                        text: 'OK', onPress: () => {
-                            p_onPressFunction()
-                            console.log('futur resolve')
-                            resolve()
-                        }
-                    },
-                ],
-                { cancelable: false }
-            )
-        })
-    }
 
     fitMapToViaGaronnaCoordinates = () => {
         console.log('fitMAPPs')
@@ -121,11 +133,12 @@ class RouteScreen extends React.Component {
                     edgePadding: { top: 40, right: 40, bottom: 40, left: 40 },
                     animated: true
                 })
-        }, 0) 
+        }, 0)
     }
 
+
     updateCheckboxState(p_interestPointType) {
-        let actualState = { ...this.state }
+        const actualState = { ...this.state }
 
         actualState.checkbox[p_interestPointType] = !actualState.checkbox[p_interestPointType]
         this.setState({ actualState })
@@ -135,9 +148,9 @@ class RouteScreen extends React.Component {
 
     renderCitiesToPick() {
         // Get the json containing cities (key) and their lat/long (value)
-        let jsonCities = require('../data/villes.json')
+        // const jsonCities = require('../../data/villes.json')
         // Get cities in an array by iterating over keys of the json (which are the cities)
-        cities = Object.keys(jsonCities)
+        const cities = Object.keys(jsonCities)
         // Add a label value in the picker
         // unshift() add item to the first place of an array
         cities.unshift('Veuillez choisir une ville')
@@ -146,7 +159,7 @@ class RouteScreen extends React.Component {
             // Index 0 is message 'Veuillez choisir une ville' so his value is set to ''
             if (index === 0) {
                 return (
-                    <Picker.Item key={index} label={city} value='' />
+                    <Picker.Item key={index} label={city} value="" />
                 )
             }
 
@@ -165,15 +178,17 @@ class RouteScreen extends React.Component {
                 />
             )
         }
+        return false
     }
 
     // Render the "restaurants" markers
+    // eslint-disable-next-line consistent-return
     renderInterestPointMarkers(p_interestPointType) {
         // TODO: mettre if this.state.[] au dessus du bloc de if else
-        let placesList = []
+        const placesList = []
 
         if (this.state.checkbox[p_interestPointType]) {
-            if (p_interestPointType === "restaurants" || p_interestPointType === "commerces_vie_pratique") {
+            if (p_interestPointType === 'restaurants' || p_interestPointType === 'commerces_vie_pratique') {
                 console.log('inside if')
 
                 for (let i = 0; i < interestPoints[p_interestPointType].length; i++) {
@@ -182,9 +197,10 @@ class RouteScreen extends React.Component {
 
                 return placesList.map((place, index) => {
                     // console.log(place.lat)
-                    return this.renderPlaceMarker(place, index, p_interestPointType === "restaurants" ? "gold" : "orange")
+                    return this.renderPlaceMarker(place, index,
+                        p_interestPointType === 'restaurants' ? 'gold' : 'orange')
                 })
-            } else if (p_interestPointType === "hebergements") {
+            } else if (p_interestPointType === 'hebergements') {
                 console.log('inside if')
 
                 for (let i = 0; i < interestPoints.hotels.length; i++) {
@@ -193,12 +209,8 @@ class RouteScreen extends React.Component {
                 for (let j = 0; j < interestPoints.campings.length; j++) {
                     placesList.push(interestPoints.campings[j])
                 }
-
-                return placesList.map((place, index) => {
-                    // console.log(place.lat)
-                    return this.renderPlaceMarker(place, index, "green")
-                })
-            } else if (p_interestPointType === "points_interets") {
+                return placesList.map((place, index) => this.renderPlaceMarker(place, index, 'green'))
+            } else if (p_interestPointType === 'points_interets') {
                 console.log('inside if points_interets')
 
                 for (let i = 0; i < interestPoints.loisirs.length; i++) {
@@ -212,7 +224,7 @@ class RouteScreen extends React.Component {
                 }
 
                 return placesList.map((place, index) => {
-                    return this.renderPlaceMarker(place, index, "violet")
+                    return this.renderPlaceMarker(place, index, 'violet')
                 })
             } else {
                 return false
@@ -221,14 +233,14 @@ class RouteScreen extends React.Component {
     }
 
     renderPlaceMarker(p_place, p_index, p_color) {
-        return(
+        return (
             <MapView.Marker
                 key={p_index}
                 coordinate={{ latitude: parseFloat(p_place.lat), longitude: parseFloat(p_place.long) }}
                 title={p_place.nom}
-                onPress={() => console.log('onpress marker ' + p_place.nom)}
+                onPress={() => console.log(`onpress marker ${p_place.nom}`)}
                 pinColor={p_color}
-                // tracksViewChanges={false}
+            // tracksViewChanges={false}
             >
                 <MapView.Callout
                     onPress={() => this.props.navigation.navigate('InterestPointDetails', {
@@ -256,7 +268,7 @@ class RouteScreen extends React.Component {
         if (this.state.loading) {
             return (
                 <View style={styles.loadingContainer}>
-                    <ActivityIndicator 
+                    <ActivityIndicator
                         size="large"
                         color="#1F5070"
                     />
@@ -272,12 +284,12 @@ class RouteScreen extends React.Component {
                             <Picker
                                 selectedValue={this.state.startCity}
                                 style={{ height: width(15), width: width(40) }}
-                                onValueChange={(itemValue, itemIndex) => {
+                                onValueChange={(itemValue) => {
                                     this.setState({ startCity: itemValue })
                                     this.fitMapToViaGaronnaCoordinates()
                                 }}
                             >
-                                {this.renderCitiesToPick("start")}
+                                {this.renderCitiesToPick('start')}
                             </Picker>
                         </View>
                         <View style={styles.pickerLine}>
@@ -285,12 +297,12 @@ class RouteScreen extends React.Component {
                             <Picker
                                 selectedValue={this.state.endCity}
                                 style={{ height: width(15), width: width(40) }}
-                                onValueChange={(itemValue, itemIndex) => {
+                                onValueChange={(itemValue) => {
                                     this.setState({ endCity: itemValue })
                                     this.fitMapToViaGaronnaCoordinates()
                                 }}
                             >
-                                {this.renderCitiesToPick("end")}
+                                {this.renderCitiesToPick('end')}
                             </Picker>
                         </View>
                     </View>
@@ -306,16 +318,17 @@ class RouteScreen extends React.Component {
                             onPropsPassed={() => this.fitMapToViaGaronnaCoordinates()}
                         />
                         {this.renderUserLocationMarker()}
-                        {this.renderInterestPointMarkers("restaurants")}
-                        {this.renderInterestPointMarkers("commerces_vie_pratique")}
-                        {this.renderInterestPointMarkers("hebergements")}
-                        {this.renderInterestPointMarkers("points_interets")}
+                        {this.renderInterestPointMarkers('restaurants')}
+                        {this.renderInterestPointMarkers('commerces_vie_pratique')}
+                        {this.renderInterestPointMarkers('hebergements')}
+                        {this.renderInterestPointMarkers('points_interets')}
                     </MapView>
                     <View style={styles.checkboxsContainer}>
-                        {this.renderInterestPointCheckbox("restaurants", "Restauration")}
-                        {this.renderInterestPointCheckbox("commerces_vie_pratique", "Commerces et vie pratique")}
-                        {this.renderInterestPointCheckbox("hebergements", "Hebergements")}
-                        {this.renderInterestPointCheckbox("points_interets", "Points d'\intérêt")}
+                        {this.renderInterestPointCheckbox('restaurants', 'Restauration')}
+                        {this.renderInterestPointCheckbox('commerces_vie_pratique', 'Commerces et vie pratique')}
+                        {this.renderInterestPointCheckbox('hebergements', 'Hebergements')}
+                        {this.renderInterestPointCheckbox('points_interets', "Points d'intérêt")}
+                        {/* {this.renderInterestPointCheckbox('points_interets', "Points d'\intérêt")} */}
                     </View>
                 </ScrollView>
             )
@@ -350,7 +363,7 @@ const styles = StyleSheet.create({
     }
 });
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
     console.log('mapStateToProps')
 
     const { routeCoordinates } = state

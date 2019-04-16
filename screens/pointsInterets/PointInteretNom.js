@@ -8,18 +8,18 @@ import {
     TouchableHighlight,
     TextInput,
     Button,
-} from 'react-native';
-import pointInteret from '../../data/PtsInteret.json';
-require('string_score')
+} from 'react-native'
 
+import pointInteret from '../../data/PtsInteret.json'
 import { toLowerCaseWithoutAccents } from '../../utils/functions'
+
+require('string_score')
 
 
 export default class PointInteretNom extends React.Component {
-
     constructor(props) {
         super(props);
-        this.searchedText = ""
+        this.searchedText = ''
         this.dataSource = [] // store an object of json data
 
         this.state = {
@@ -32,11 +32,11 @@ export default class PointInteretNom extends React.Component {
         this.dataSource = pointInteret.pointInteret
     }
 
-    _loadPtsInteret() {
-        let pointsInteretsFound = []
+    loadPtsInteret() {
+        const pointsInteretsFound = []
         for (let i = 0; i < this.dataSource.length; i++) {
-            let inputString = toLowerCaseWithoutAccents(this.state.searchedText)
-            let actualPointInteret = toLowerCaseWithoutAccents(this.dataSource[i].nom)
+            const inputString = toLowerCaseWithoutAccents(this.state.searchedText)
+            const actualPointInteret = toLowerCaseWithoutAccents(this.dataSource[i].nom)
 
             if (actualPointInteret.score(inputString) >= 0.35) {
                 console.log(inputString)
@@ -44,9 +44,6 @@ export default class PointInteretNom extends React.Component {
                 console.log(actualPointInteret.score(inputString))
                 pointsInteretsFound.push(this.dataSource[i])
             }
-            // if (inputString === actualPointInteret) {
-            //     pointsInteretsFound.push(this.dataSource[i])
-            // }
         }
         this.setState({ pointsInteretsFound })
     }
@@ -60,52 +57,48 @@ export default class PointInteretNom extends React.Component {
                         style={styles.champ}
                         value={this.state.searchedText}
                         onChangeText={searchedText => this.setState({ searchedText })}
-                        // onSubmitEditing={() => this._loadPtsInteret()}
                         placeholder="Vous avez un lieu en tête ?"
                     />
                     <Button
                         style={styles.bouton}
                         title="Rechercher"
-                        onPress={() => this._loadPtsInteret()}
+                        onPress={() => this.loadPtsInteret()}
                     />
                 </View>
 
                 <FlatList
                     data={this.state.pointsInteretsFound}
                     keyExtractor={(item, index) => index.toString()}
-                    renderItem={({ item }) => {
-                        return (
-                            <View style={styles.main_container}>
-                                <Image
-                                    source={{ uri: item.poster_path }}
-                                    style={styles.image}
-                                />
-                                <TouchableHighlight
-                                    style={styles.highlighter}
-                                    underlayColor='grey'
-                                    onPress={() => this.props.navigation.navigate('PointInteretDetail', {
-                                        placeDetails: item
-                                    })}
-                                >
-                                    <View style={styles.content_container}>
-                                        <View style={styles.header_container}>
-                                            <Text style={styles.title_text}>{item.nom}</Text>
-                                            <View style={styles.commune_container}>
-                                                <Text style={styles.commune_text}>{item.code_postal}</Text>
-                                                <Text style={styles.commune_text}>{item.commune}</Text>
-                                            </View>
-                                        </View>
-                                        <View style={styles.description_container}>
-                                            <Text style={styles.description_text}>{item.adresse}</Text>
+                    renderItem={({ item }) => (
+                        <View style={styles.main_container}>
+                            <Image
+                                source={{ uri: item.poster_path }}
+                                style={styles.image}
+                            />
+                            <TouchableHighlight
+                                style={styles.highlighter}
+                                underlayColor="grey"
+                                onPress={() => this.props.navigation.navigate('PointInteretDetail', {
+                                    placeDetails: item
+                                })}
+                            >
+                                <View style={styles.content_container}>
+                                    <View style={styles.header_container}>
+                                        <Text style={styles.title_text}>{item.nom}</Text>
+                                        <View style={styles.commune_container}>
+                                            <Text style={styles.commune_text}>{item.code_postal}</Text>
+                                            <Text style={styles.commune_text}>{item.commune}</Text>
                                         </View>
                                     </View>
-                                </TouchableHighlight>
-                            </View>
-                        )
-                    }}
+                                    <View style={styles.description_container}>
+                                        <Text style={styles.description_text}>{item.adresse}</Text>
+                                    </View>
+                                </View>
+                            </TouchableHighlight>
+                        </View>
+                    )}
                 />
             </View>
-
         )
     }
 }
@@ -171,5 +164,4 @@ const styles = StyleSheet.create({
         textAlign: 'right',
         fontSize: 14
     }
-
 })
